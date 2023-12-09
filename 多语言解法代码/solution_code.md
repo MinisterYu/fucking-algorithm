@@ -63502,7 +63502,7 @@ class Solution {
 ```javascript
 // by chatGPT (javascript)
 var topKFrequent = function(words, k) {
-    // 字符串 -> 该字符串出现的频率
+    // Strings -> 该字符串出现的频率
     let wordToFreq = new Map();
     for (let word of words) {
         wordToFreq.set(word, wordToFreq.get(word) + 1 || 1);
@@ -63539,7 +63539,7 @@ var topKFrequent = function(words, k) {
 # by chatGPT (python)
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
-        # 字符串 -> 该字符串出现的频率
+        # Strings -> 该字符串出现的频率
         wordToFreq = {}
         for word in words:
             wordToFreq[word] = wordToFreq.get(word, 0) + 1
