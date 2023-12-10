@@ -3,7 +3,7 @@
 # @Time    : 2023/12/4 17:36
 # @Author  : MinisterYU
 # @File    : linknode.py
-from 练习题.Linked import *
+from 练习题.链表 import *
 
 
 # 链表排序
