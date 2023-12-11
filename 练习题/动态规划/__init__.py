@@ -17,7 +17,7 @@ class Solution(object):
 
         return dp[-1][-1]
 
-    # TODO 343. 整数拆分:
+    # TODO 343. 整数拆分:求最大乘积
     def integerBreak(self, n):
         dp = [0] * (n + 1)
         dp[0] = 0
@@ -27,7 +27,7 @@ class Solution(object):
                 dp[i] = max(dp[i], j * (i - j), j * dp[i - j])
         return dp[-1]
 
-    # TODO 96. 不同搜索二叉树
+    # TODO 96. 不同搜索二叉树：求有多少种组合的二叉树
     def numTrees(self, n):
         """
         :type n: int
@@ -115,7 +115,7 @@ class Solution(object):
                 dp[j] = dp[j] + dp[j - coins[i]]
         return dp[j]
 
-    # TODO 377 . 完全背包（组合综合，背包装物品的排列数）
+    # TODO 377 . 完全背包（排列数，背包装物品的排列数）
     def combinationSum4(self, nums, target):
         dp = [0] * (target + 1)
 
@@ -150,7 +150,7 @@ class Solution(object):
 
         return dp[n]
 
-    # TODO 139 - - 完全背包（单次拆分）
+    # TODO 139 . 完全背包 | 拆分单词
     def wordBreak(self, s, wordDict):
 
         dp = [False] * (len(s) + 1)
@@ -244,7 +244,6 @@ class Solution(object):
         ans = 0
         for i in range(1, len(nums1) + 1):
             for j in range(1, len(nums2) + 1):
-
                 if nums1[i - 1] == nums2[j - 1]:  # 判断条件
                     dp[i][j] = dp[i - 1][j - 1] + 1
             ans = max(ans, max(dp[i]))
@@ -259,7 +258,7 @@ class Solution(object):
         '''
         return ans
 
-    # TODO 1143. 最长子序列 2维
+    # TODO 1143. 最长子序列 2维 | "ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
     def longestCommonSubsequence(self, text1, text2):
         m, n = len(text1), len(text2)
         dp = [[0] * (n + 1) for _ in range(m + 1)]
@@ -272,7 +271,7 @@ class Solution(object):
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
         return dp[m][n]
 
-    # TODO 53. 最大子序和
+    # TODO 53. 最大子序和 | 给你一个整数数组 nums ，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。
     def maxSubArray(self, nums) -> int:
 
         dp = [0] * (len(nums))
