@@ -27,6 +27,28 @@ def find_max(s, left, right):
     return left + 1, right - 1
 
 
+# TODO 验证回文串，最多删除一个字符
+def validPalindrome(s):
+    left = 0
+    right = len(s) - 1
+    while left <= right:
+        if s[left] == s[right]:
+            left += 1
+            right -= 1
+        else:
+            return isPalindrome(s, left + 1, right) or isPalindrome(s, left, right - 1)
+    return True
+
+
+def isPalindrome(s, left, right):
+    while left <= right:
+        if s[left] != s[right]:
+            return False
+        left += 1
+        right -= 1
+    return True
+
+
 # 示例用法
 s = "abcbbc"
 result = longestPalindrome(s)
@@ -72,26 +94,11 @@ def lengthOfLastWord(s):
 
     return right - left
 
-    # length = 0
-    # end = len(s) - 1
-    #
-    # # 从字符串末尾开始遍历
-    # while end >= 0:
-    #     # 如果当前字符不是空格，则增加长度
-    #     if s[end] != ' ':
-    #         length += 1
-    #     # 如果当前字符是空格且长度大于0，则表示最后一个单词已经遍历完，直接返回长度
-    #     elif length > 0:
-    #         return length
-    #     end -= 1
-    #
-    # return length
-
 
 print(lengthOfLastWord(""))
 
 
-# TODO 151，反转字符串中的单词， 比如 " the sky is blue "  -> "blue is sky the"
+# TODO  151，反转字符串中的单词， 比如 " the sky is blue "  -> "blue is sky the"
 def reverseWords(s):
     left = 0
     right = len(s) - 1
@@ -116,7 +123,7 @@ def reverseWords(s):
     return ' '.join(que)
 
 
-# TODO 151，反转字符串中的单词， 整体反转
+# TODO 151，反转字符串中的单词， the sky is blue -> blue is sky the
 def reverseWords2(s):
     s = s.strip()
 
@@ -128,47 +135,63 @@ def reverseWords2(s):
 
     start = 0
     char_list = list(s)
-    # print(''.join(char_list))
-
     revs_str(start, len(s) - 1, char_list)
-
-    for end in range(len(char_list) - 1):
+    end = 0
+    while end < len(char_list):
+        # for end in range(len(char_list) - 1):
         if char_list[end] == ' ':
             revs_str(start, end - 1, char_list)
             start = end + 1
+        end += 1
 
     revs_str(start, len(char_list) - 1, char_list)
 
     return ''.join(char_list)
 
-    # def revers_str(start, end, char_list):
-    #     while start < end:
-    #         char_list[start], char_list[end] = char_list[end], char_list[start]
-    #         start += 1
-    #         end -= 1
-    #
-    # left, right = 0, len(s) - 1
-    # while left <= right and s[left] == ' ':
-    #     left += 1
-    #
-    # while left <= right and s[right] == ' ':
-    #     right -= 1
-    #
-    # char_list = list(s[left:right + 1])
-    #
-    # start = 0
-    # revers_str(start, len(char_list) - 1, char_list)
-    #
-    # for end in range(len(char_list)):
-    #     if char_list[end] == ' ':
-    #         revers_str(start, end - 1, char_list)
-    #         start = end + 1
-    # revers_str(start, len(char_list) - 1, char_list)
-    #
-    # return ''.join(char_list)
+
+#
+print(reverseWords2(" the   sky is blue "))
 
 
-print(reverseWords2(" the sky is blue "))
+# TODO 给定一个字符串 s 和一个整数 k，从字符串开头算起，每计数至 2k 个字符，就反转这 2k 字符中的前 k 个字符。
+# TODO s = "abcdefg", k = 2 输出："bacdfeg"
+def reverseStr(s, k):
+    cs = list(s)
+    n = len(s)
+    l = 0
+    while l < n:
+        r = l + k - 1
+        reverse(cs, l, min(r, n - 1))
+        l += 2 * k
+    return ''.join(cs)
+
+
+def reverse(cs, l, r):
+    while l < r:
+        cs[l], cs[r] = cs[r], cs[l]
+        l += 1
+        r -= 1
+
+
+# TODO  反转字符串：s = "Mr Ding" 输出："rM gniD"
+def reverseWords(s):
+    chars = list(s)  # 将字符串转换为字符数组
+    start = 0
+    end = 0
+    while end < len(chars):
+        if chars[end] == ' ':
+            reverse(chars, start, end - 1)  # 反转单词
+            start = end + 1  # 更新下一个单词的起始位置
+        end += 1
+    reverse(chars, start, end - 1)  # 反转最后一个单词
+    return ''.join(chars)  # 将字符数组转换为字符串
+
+
+def reverse(chars, start, end):
+    while start < end:
+        chars[start], chars[end] = chars[end], chars[start]  # 交换字符
+        start += 1
+        end -= 1
 
 
 # TODO 异位词检查 "anagram" "nagaram"
@@ -197,7 +220,7 @@ t = "nagaram"
 isAnagram(s, t)
 
 
-# todo 单次规律  "abba"  "cat dog dog cat"
+# TODO 单次规律  "abba"  "cat dog dog cat"
 def wordPattern(pattern, s):
     words = s.split()  # 将字符串s按空格分割成单词列表
     if len(pattern) != len(words):  # 如果规律和单词数量不相等，则不遵循相同的规律
@@ -225,7 +248,24 @@ def wordPattern(pattern, s):
     return True  # 如果遍历结束后没有返回False，则表示遵循相同的规律
 
 
-# todo 找到第一个出现的字母,找到就返回下标，没有就返回-1
+# TODO 同构字符串 abba xyyx
+def isIsomorphic(s, t):
+    s2t = {}
+    t2s = {}
+    for i in range(len(s)):
+        x, y = s[i], t[i]
+        if x in s2t.keys() and s2t[x] != y or \
+                y in t2s.keys() and t2s[y] != x:
+            return False
+
+        s2t[x] = y
+        t2s[y] = x
+    # print s2t
+    # print t2s
+    return True
+
+
+# TODO 找到第一个出现的字母,找到就返回下标，没有就返回-1
 def findFirstAlpha(s):
     char_count = {}
     for char in s:
@@ -235,3 +275,32 @@ def findFirstAlpha(s):
         if char_count[s[i]] == 1:
             return i
     return -1
+
+
+# TODO 520. 检测大写字母
+def detectCapitalUse(word):
+    if word.upper() == word:
+        return True
+    if word.lower() == word:
+        return True
+    n = len(word)
+    idx = 1
+    if word[0].isupper():
+        while idx < n and word[idx].islower():
+            idx += 1
+    return idx == n
+
+
+# TODO 821. 字符的最短距离，给你一个字符串 s 和一个字符 c ，且 c 是 s 中出现过的字符。
+# TODO 输入：s = "loveleetcode", c = "e" # 输出：[3,2,1,0,1,0,0,1,2,2,1,0]
+def shortestToChar(s, c):
+    n = len(s)
+    answer = [float('inf')] * n
+    for i in range(n):
+        if s[i] == c:
+            answer[i] = 0
+    for i in range(1, n):
+        answer[i] = min(answer[i], answer[i - 1] + 1)
+    for i in range(n - 2, -1, -1):
+        answer[i] = min(answer[i], answer[i + 1] + 1)
+    return answer

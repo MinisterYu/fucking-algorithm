@@ -29,7 +29,7 @@ class Solution(object):
         dfs(0)
         return ans
 
-    # TODO 40. 组合总和 II, 去重
+    # TODO 40. 组合总和 输入：candidates = [2,3,6,7], target = 7  输出：[[2,2,3],[7]]
     def combinationSum2(self, candidates, target):
         candidates.sort()
         ans = []
@@ -223,3 +223,4 @@ class Solution(object):
         used = [False] * len(nums)  # 记录数字是否被使用过的列表
         backtrack([], used)  # 从空路径开始回溯
         return res
+
