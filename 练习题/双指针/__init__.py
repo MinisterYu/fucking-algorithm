@@ -132,3 +132,20 @@ class Solution(object):
 
         return max_len
 
+def lengthOfLongestSubstring( s):
+        n = len(s)
+        if n <= 1:
+            return n
+
+        max_len = 0  # 最长子串的长度
+        left = 0  # 滑动窗口的左边界
+        seen = {}  # 记录字符最后一次出现的位置
+
+        for right, value in enumerate(s):
+            if value in seen and seen[value] >= left:
+                left = seen[value] + 1 # 找到 left的位置 + 1
+
+            seen[value] = right
+            max_len = max(max_len, right - left + 1)
+
+        return max_len
