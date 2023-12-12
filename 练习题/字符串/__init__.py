@@ -353,17 +353,19 @@ def reformat2(s):
 print(reformat2('1abc23d'))
 
 
-# TODO 1668 找到最大的重复子字符串
+# TODO 1668 找到最大的重复子字符串 ，二分，然后找子数组是不是在字符串里面
 def maxRepeating(word, sequence):
     l = 0
     r = len(sequence) // len(word)
     while l < r:
-        mid = (r - l + 1 ) // 2 + l
+        mid = (r - l + 1) // 2 + l
         if word * mid in sequence:
             l = mid
         else:
-            r = mid -1
+            r = mid - 1
     return l
 
 
 print(maxRepeating("ba", "bababac"))
+
+
