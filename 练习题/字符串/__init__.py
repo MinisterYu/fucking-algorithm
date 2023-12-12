@@ -304,3 +304,66 @@ def shortestToChar(s, c):
     for i in range(n - 2, -1, -1):
         answer[i] = min(answer[i], answer[i + 1] + 1)
     return answer
+
+
+# TODO 字符串排序 0ab1c2 0a1b2c 或者 covid2019 c2v0i1d9
+def reformat(s):
+    digits = [i for i in s if i.isdigit()]
+    chars = [i for i in s if i.isalpha()]
+
+    if abs(len(digits) - len(chars)) > 1:
+        return ''
+
+    result = []
+    # char多的时候，char为第一个
+    is_turn = len(chars) >= len(digits)
+
+    while digits or chars:
+        if is_turn:
+            result.append(chars.pop())
+        else:
+            result.append(digits.pop())
+        is_turn = not is_turn
+
+    return ''.join(result)
+
+
+print(reformat('abc123d'))
+
+
+# TODO 字符串排序（没搞懂跳转逻辑） 0ab1c2 0a1b2c 或者 covid2019 c2v0i1d9
+def reformat2(s):
+    digits = sum(i.isdigit() for i in s)
+    chars = len(s) - digits
+
+    if abs(digits - chars) > 1:
+        return ''
+
+    more_chars = chars > digits
+    s_list = list(s)
+    j = 1
+    for i in range(0, len(s_list), 2):
+        if s_list[i].isalpha() != more_chars:
+            while s_list[j].isalpha() != more_chars:
+                j += 2
+            s_list[i], s_list[j] = s_list[j], s_list[i]
+    return ''.join(s_list)
+
+
+print(reformat2('1abc23d'))
+
+
+# TODO 1668 找到最大的重复子字符串
+def maxRepeating(word, sequence):
+    l = 0
+    r = len(sequence) // len(word)
+    while l < r:
+        mid = (r - l + 1 ) // 2 + l
+        if word * mid in sequence:
+            l = mid
+        else:
+            r = mid -1
+    return l
+
+
+print(maxRepeating("ba", "bababac"))
