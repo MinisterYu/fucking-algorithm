@@ -331,27 +331,6 @@ def reformat(s):
 print(reformat('abc123d'))
 
 
-# TODO 字符串排序（没搞懂跳转逻辑） 0ab1c2 0a1b2c 或者 covid2019 c2v0i1d9
-def reformat2(s):
-    digits = sum(i.isdigit() for i in s)
-    chars = len(s) - digits
-
-    if abs(digits - chars) > 1:
-        return ''
-
-    more_chars = chars > digits
-    s_list = list(s)
-    j = 1
-    for i in range(0, len(s_list), 2):
-        if s_list[i].isalpha() != more_chars:
-            while s_list[j].isalpha() != more_chars:
-                j += 2
-            s_list[i], s_list[j] = s_list[j], s_list[i]
-    return ''.join(s_list)
-
-
-print(reformat2('1abc23d'))
-
 
 # TODO 1668 找到最大的重复子字符串 ，二分，然后找子数组是不是在字符串里面
 def maxRepeating(word, sequence):
