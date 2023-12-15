@@ -72,7 +72,6 @@ class Solution(object):
         for i in range(1, n):
             pre[i] = max(pre[i - 1], height[i])
 
-
         post = [0] * n
         post[-1] = height[-1]
         for i in range(n - 2, -1, -1):
@@ -91,13 +90,12 @@ class Solution(object):
         for right, value in enumerate(nums):
             count += value
             while count >= target:
-                ans = min(ans, right -left + 1)
+                ans = min(ans, right - left + 1)
                 count -= nums[left]
                 left += 1
         return ans if ans < len(nums) + 1 else 0
 
-
-    #TODO 713. 乘积小于 K 的子数组 | 给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。
+    # TODO 713. 乘积小于 K 的子数组 | 给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。
     def numSubarrayProductLessThanK(self, nums, k):
         if k <= 1:
             return 0
@@ -113,7 +111,7 @@ class Solution(object):
             ans += right - left + 1
         return ans
 
-    #TODO 3. 无重复字符的最长子串
+    # TODO 3. 无重复字符的最长子串
     def lengthOfLongestSubstring(self, s):
         n = len(s)
         if n <= 1:
@@ -132,20 +130,39 @@ class Solution(object):
 
         return max_len
 
-def lengthOfLongestSubstring( s):
-        n = len(s)
-        if n <= 1:
-            return n
 
-        max_len = 0  # 最长子串的长度
-        left = 0  # 滑动窗口的左边界
-        seen = {}  # 记录字符最后一次出现的位置
+def lengthOfLongestSubstring(s):
+    n = len(s)
+    if n <= 1:
+        return n
 
-        for right, value in enumerate(s):
-            if value in seen and seen[value] >= left:
-                left = seen[value] + 1 # 找到 left的位置 + 1
+    max_len = 0  # 最长子串的长度
+    left = 0  # 滑动窗口的左边界
+    seen = {}  # 记录字符最后一次出现的位置
 
-            seen[value] = right
-            max_len = max(max_len, right - left + 1)
+    for right, value in enumerate(s):
+        if value in seen and seen[value] >= left:
+            left = seen[value] + 1  # 找到 left的位置 + 1
 
-        return max_len
+        seen[value] = right
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
+
+
+matrix = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+n = len(matrix)
+for i in range(0, n):
+    for j in range(0,i):
+        matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+        # 每行列交换
+for i in range(n):
+    for j in range(n // 2):
+        matrix[i][j], matrix[i][n - j - 1] = matrix[i][n - j - 1], matrix[i][j]
+
+print(matrix)
