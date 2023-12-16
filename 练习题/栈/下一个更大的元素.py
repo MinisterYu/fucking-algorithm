@@ -1,6 +1,22 @@
 # coding:utf-8
 from typing import List
 
+'''
+这个模板使用了一个栈来辅助解决 Next Greater Element 问题。它遍历输入数组 nums，并维护一个递减/递减的栈
+def nextGreaterElement(nums):
+    n = len(nums)
+    result = [-1] * n
+    stack = []
+
+    for i in range(n):
+        while stack and nums[i] > nums[stack[-1]]:
+            index = stack.pop()
+            result[index] = nums[i]
+        stack.append(i)
+
+    return result
+'''
+
 
 class Solution:
     def finalPrices(self, prices: List[int]) -> List[int]:
@@ -36,7 +52,7 @@ class Solution:
             result[i] = stack[-1] if stack else -1  # 这个元素身后的第一个高个
             # stack.append(i)  # 进栈，接受之后的身高判定吧！
             stack.append(nums[i])
-            
+
         print(result)
         return result
 
@@ -74,3 +90,4 @@ if __name__ == '__main__':
     print([4, 5, 2, 10, 8])
     solution.next_greater_element([4, 5, 2, 10, 8])
     solution.next_greater_element_reversed([4, 5, 2, 10, 8])
+
