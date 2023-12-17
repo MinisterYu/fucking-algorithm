@@ -80,6 +80,32 @@ class Solution:
             root = node.right
         return res
 
+    #TODO  二叉树层序遍历
+    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+
+        if not root:
+            return []
+
+        result = []
+        queue = deque(root)
+
+        while queue:
+            level = []
+            level_size = len(queue)
+
+            for _ in range(level_size):
+                node = queue.popleft()
+                level.append(node.val)
+
+                if node.left:
+                    queue.append(node.left)
+                if node.right:
+                    queue.append(node.right)
+
+            result += level
+
+        return result
+
     # TODO N叉树 前续遍历
     def preorder(self, root: 'Node') -> List[int]:
         if not root:
@@ -109,3 +135,7 @@ class Solution:
                 stack.append(child)
         return res
 
+
+if __name__ == '__main__':
+    solution = Solution()
+    solution.levelOrder()
