@@ -3,6 +3,10 @@
 # @Time    : 2023/12/17 19:02
 # @Author  : MinisterYU
 # @File    : __init__.py.py
+
+from collections import deque
+
+
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
         self.val = val
@@ -10,35 +14,30 @@ class TreeNode:
         self.right = right
 
 
-def buildTree(nums):
+# def buildTree(nums):
+#     if not nums:
+#         return None
+#     return buildTreeHelper(nums, 0, len(nums) - 1)
+
+def arrayToTree(nums):
     if not nums:
         return None
-    return buildTreeHelper(nums, 0, len(nums) - 1)
 
+    root = TreeNode(nums[0])
+    queue = deque([root])
 
-def buildTreeHelper(nums, start, end):
-    if start > end:
-        return None
+    i = 1
+    while queue and i < len(nums):
+        node = queue.popleft()
 
-    mid = (start + end) // 2
-    root = TreeNode(nums[mid])
+        if nums[i] is not None:
+            node.left = TreeNode(nums[i])
+            queue.append(node.left)
+        i += 1
 
-    root.left = buildTreeHelper(nums, start, mid - 1)
-    root.right = buildTreeHelper(nums, mid + 1, end)
+        if i < len(nums) and nums[i] is not None:
+            node.right = TreeNode(nums[i])
+            queue.append(node.right)
+        i += 1
 
     return root
-
-
-def treeToArray(root):
-    result = []
-    treeToArrayHelper(root, result)
-    return result
-
-
-def treeToArrayHelper(node, result):
-    if not node:
-        return
-
-    result.append(node.val)
-    treeToArrayHelper(node.left, result)
-    treeToArrayHelper(node.right, result)

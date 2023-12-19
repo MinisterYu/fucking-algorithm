@@ -16,6 +16,18 @@ def bubble_sort(nums):
     return nums
 
 
+def bubble_sort2(nums):
+    n = len(nums)
+    swap = True
+    while swap:
+        swap = False
+        for i in range(1, n):
+            if nums[i - 1] > nums[i]:
+                nums[i], nums[i - 1] = nums[i - 1], nums[i]
+                swap = True
+    return nums
+
+
 # TODO 归并
 def merge_sort(nums):
     if len(nums) <= 1:
@@ -92,8 +104,9 @@ def sqaure_sort(nums):
     return res
 
 
-# nums = [100, 4, 200, 1, 3, 2]
-# print(bubble_sort(nums))
+nums = [100, 4, 200, 1, 3, 2]
+print(bubble_sort(nums))
+print(bubble_sort2(nums))
 # print(merge_sort(nums))
 # print(quick_sort(nums))
 # print(selection_sort(nums))
@@ -150,6 +163,3 @@ def yh_trigle(numRows):
 
     return triangle
 
-nums = [1,2,3]
-nums = nums[::-1]
-print(nums)
