@@ -70,5 +70,31 @@ def sort_mege(nums):
     return sorted_list, found_count + left_count + right_count
 
 
-nums = [2, 1, 4, 3, 1]
-print(sort_mege(nums))
+def demo(nums):
+    def get_pairs(nums):
+        if len(nums) <= 1:
+            return 0, nums
+
+        mid = len(nums) // 2
+        left_count, left_sort = get_pairs(nums[:mid])
+        right_count, right_sort = get_pairs(nums[mid:])
+
+        list_sort = []
+        pairs_count = 0
+        i, j = 0, 0
+
+        while i < len(left_sort) and j < len(right_sort):
+            if left_sort[i] <= right_sort[j]:
+                list_sort.append(left_sort[i])
+                i += 1
+            else:
+                list_sort.append(right_sort[j])
+                j += 1
+                pairs_count += len(left_sort) - i
+
+        list_sort.extend(left_sort[i:])
+        list_sort.extend(right_sort[j:])
+        return left_count + right_count + pairs_count, list_sort
+
+    return get_pairs(nums)[0]
+
