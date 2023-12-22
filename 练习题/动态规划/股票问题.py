@@ -12,73 +12,44 @@ prices = [1, 2, 3, 4, 5, 6]
 '''
 
 
-def stock_1(prices):
-    '''
+class Solution:
+    # TODO ------------- 股票买卖 -----------------
+    # TODO 121. 买卖股票的最佳时机 -- 买卖一次
+    def maxProfit(self, prices):
+        dp = [[0] * 2 for _ in range(len(prices) + 1)]
+        # 不持有股票的状态
+        dp[0][0] = 0
+        # 持有股票的状态
+        dp[0][1] = -prices[0]
 
-    '''
+        for i in range(1, len(prices) + 1):
+            # 第 i 天持有 :    i-1 持有， 到i天持有
+            dp[i][1] = max(dp[i - 1][1], -prices[i - 1])
+            # 第 i 天不持有 : i-1 不持有， 到i不持有
+            dp[i][0] = max(dp[i - 1][0], dp[i][1] + prices[i - 1])
 
-    dp = [[0] * 2 for _ in prices]
+        for i in dp:
+            print(i)
+        return max(dp[-1][0], dp[-1][1])
 
-    dp[0][0] = 0  # 卖出
-    dp[0][1] = -prices[0]  # 买入
-    profit = 0
-    for i in range(1, len(prices)):
-        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])  # 可以买卖N多次
-        # dp[i][1] = max(dp[i - 1][1], -prices[i])  # 只买卖一次
-        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i])
-        profit = max(dp[i][0], dp[i][1])
+    # TODO 121. 买卖股票的最佳时机 -- 买卖N次
+    def maxProfit_Ntimes(self, prices: list) -> int:
+        dp = [0, 0]
 
-    return profit
+        dp[0] = 0
+        dp[1] = -prices[0]
+        for i in range(len(prices)):
+            dp[1] = max(dp[1], dp[0] - prices[i])
+            dp[0] = max(dp[0], dp[1] + prices[i])
+        return max(dp)
 
+    # TODO 714. 买卖股票的最佳时机 -- 买卖N次
+    def maxProfit_fee(self, prices: list, fee: int) -> int:
+        dp = [0, 0]
 
-def stock_1_simple(prices):
-    dp = [0, 0]
-
-    dp[0] = 0  # 卖出
-    dp[1] = -prices[0]  # 买入
-
-    for i in range(1, len(prices)):
-        dp[1] = max(dp[1], dp[0] - prices[i])  # 可以买卖N多次
-        # dp[1] = max(dp[1], - prices[i])  # 只买卖一次
-        dp[0] = max(dp[0], dp[1] + prices[i])
-
-    return dp[0]
-
-
-print(stock_1_simple([7, 1, 5, 3, 6, 4]))
-
-
-def stock_2(prices, fee):
-    '''
-
-    '''
-
-    dp = [[0] * 2 for _ in prices]
-
-    dp[0][0] = 0  # 卖出
-    dp[0][1] = -prices[0]  # 买入
-    profit = 0
-    for i in range(1, len(prices)):
-        dp[i][1] = max(dp[i - 1][1], dp[i - 1][0] - prices[i])  # 可以买卖N多次
-        dp[i][0] = max(dp[i - 1][0], dp[i - 1][1] + prices[i] - fee)
-        profit = max(dp[i][0], dp[i][1])
-
-    return profit if profit > 0 else 0
-
-
-def stock_2_simple(prices, fee):
-    dp = [0, 0]
-
-    dp[0] = 0  # 卖出
-    dp[1] = -prices[0]  # 买入
-
-    for i in range(1, len(prices)):
-        dp[1] = max(dp[1], dp[0] - prices[i])  # 可以买卖N多次
-        # dp[1] = max(dp[1], - prices[i])  # 只买卖一次
-        dp[0] = max(dp[0], dp[1] + prices[i] - fee)
-
-    return dp[0]
-
-
-print(stock_2([1, 3, 2, 8, 4, 9], 2))
-print(stock_2([9, 8, 7, 1, 2], 3))
+        dp[0] = 0
+        dp[1] = -prices[0]
+        for i in range(len(prices)):
+            dp[1] = max(dp[1], dp[0] - prices[i])
+            dp[0] = max(dp[0], dp[1] + prices[i] - fee)
+        return max(dp)

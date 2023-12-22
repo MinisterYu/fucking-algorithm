@@ -9,8 +9,9 @@
 注意：词典中的同一个单词可能在分段中被重复使用多次。
 https://leetcode.cn/problems/word-break-ii/description/
 '''
+from typing import List
 
-
+#todo 返回所有字典拼接的组合
 class Solution(object):
     def wordBreak(self, s, wordDict):
         word_set = set(wordDict)
@@ -48,6 +49,19 @@ class Solution(object):
         sentences = backtrack(s)
         # 将句子列表转换为字符串列表
         return [' '.join(sentence) for sentence in sentences]
+
+    # todo 判断是否可以利用字典中出现的单词拼接出 s 。
+    def wordBreak_valid(self, s: str, wordDict: List[str]) -> bool:
+
+        dp = [False] * (len(s) + 1)
+        dp[0] = True
+
+        for i in range(1, len(s) + 1):
+            for j in range(i):
+                if s[j:i] in wordDict and dp[j]:
+                    dp[i] = True
+
+        return dp[-1]
 
 
 if __name__ == '__main__':

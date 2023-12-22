@@ -7,6 +7,8 @@
 import collections
 
 class Solution:
+
+    # todo 解决求一个大字符串、数组中，是否包含子字符串、子序列的通用解法
     def minWindow(self, s: str, t: str) -> str:
 
         if len(t) > len(s):

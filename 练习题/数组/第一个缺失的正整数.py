@@ -36,3 +36,9 @@ nums = [3, 4, -1, 1]
 result = firstMissingPositive(nums)
 print(result)  # 输出 2
 
+from collections import  defaultdict
+
+d = defaultdict(list)
+a = 'bdac'
+
+print(a)
