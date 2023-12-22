@@ -16,30 +16,52 @@ def nextPermutation(nums: List[int]) -> None:
 
     将位置 i+1 及其右侧的元素进行反转，以得到下一个排列。
     """
-    i = len(nums) - 2  # 从数组尾倒数第二个开始遍历， 找到第一组前一个数小于后一个数的
-    while i >= 0 and nums[i] >= nums[i + 1]:
-        i -= 1
+    #     i = len(nums) - 2  # 从数组尾倒数第二个开始遍历， 找到第一组前一个数小于后一个数的
+    #     while i >= 0 and nums[i] >= nums[i + 1]:
+    #         i -= 1
+    #
+    #     if i == -1:  # 如果没找到，则现在数组非递增，直接反转返回
+    #         nums = nums[::-1]
+    #         # nums.reverse()
+    #         return
+    #
+    #     j = len(nums) - 1
+    #     while j > i and nums[i] >= nums[j]:  # 从右往左，找到第一个 第一个大于 nums[i] 的元素 nums[j]
+    #         j -= 1
+    #
+    #     nums[i], nums[j] = nums[j], nums[i]
+    #
+    #     # 反转 i + 1后面的数字
+    #     left, right = i + 1, len(nums) - 1
+    #     while left <= right:
+    #         nums[left], nums[right] = nums[right], nums[left]
+    #         left += 1
+    #         right -= 1
+    #
+    #
+    # nums = [3, 2, 1]
+    # nextPermutation(nums)
+    #
+    # print(nums)
 
-    if i == -1:  # 如果没找到，则现在数组非递增，直接反转返回
-        nums = nums[::-1]
-        # nums.reverse()
+    n = len(nums)
+    for i in range(n - 2, -1, -1):
+        if nums[i] < nums[i + 1]:
+            break
+    else:
+        nums.reverse()
         return
 
-    j = len(nums) - 1
-    while j > i and nums[i] >= nums[j]:  # 从右往左，找到第一个 第一个大于 nums[i] 的元素 nums[j]
-        j -= 1
+    for j in range(n - 1, i, -1):
+        if nums[i] < nums[j]:
+            break
 
     nums[i], nums[j] = nums[j], nums[i]
 
-    # 反转 i + 1后面的数字
-    left, right = i + 1, len(nums) - 1
-    while left <= right:
+    left = i + 1
+    right = n - 1
+
+    while left < right:
         nums[left], nums[right] = nums[right], nums[left]
         left += 1
         right -= 1
-
-
-nums = [3, 2, 1]
-nextPermutation(nums)
-
-print(nums)

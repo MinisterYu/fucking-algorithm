@@ -4,6 +4,37 @@
 # @Author  : MinisterYU
 # @File    : __init__.py.py
 
+# 原推导式
+def testWeightBagProblem(weight, value, capacity):
+    goods = len(weight)  # 获取物品的数量
+
+    dp = [[0] * (capacity + 1) for _ in range(goods + 1)]  # 给物品增加冗余维，i = 0 表示没有物品可选
+
+    # 初始化dp数组，默认全为0即可
+    # 填充dp数组
+    for i in range(1, goods + 1):
+        for j in range(1, capacity + 1):
+            if j < weight[i - 1]:  # i - 1 对应物品 i
+                """
+                当前背包的容量都没有当前物品i大的时候，是不放物品i的
+                那么前i-1个物品能放下的最大价值就是当前情况的最大价值
+                """
+                dp[i][j] = dp[i - 1][j]
+            else:
+                """
+                当前背包的容量可以放下物品i
+                那么此时分两种情况：
+                   1、不放物品i
+                   2、放物品i
+                比较这两种情况下，哪种背包中物品的最大价值最大
+                """
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i - 1]] + value[i - 1])  # i - 1 对应物品 i
+
+    # 打印dp数组
+    for arr in dp:
+        print(arr)
+
+
 
 class Solution(object):
 
