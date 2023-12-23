@@ -1,6 +1,2 @@
 .DS_store
-*.iml
 .idea/*
-.idea/fucking-algorithm.iml
-.idea/misc.xml
-.gitignore
