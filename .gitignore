@@ -1,2 +1,4 @@
 .DS_store
 .idea/*
+.idea/misc.xml
+.idea/fucking-algorithm.iml
