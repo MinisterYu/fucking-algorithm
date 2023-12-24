@@ -123,7 +123,7 @@ class Solution:
         res = ""
 
         for i in range(n - 1, -1, -1):  # 从下往上遍历
-            for j in range(i, n):  # 从做往右遍历
+            for j in range(i, n):  # 从左往右遍历
                 if s[i] == s[j] and (j - i < 2 or dp[i + 1][j - 1]):
                     # dp[i][j] 定义 s字符串中，从i到j的最长回文子串
                     # dp[i][j] = s[i] 等于 s[j] 且 （ 左右间隔小于2，（aa,aba） 或者上一个状态为一个回文串 ）
