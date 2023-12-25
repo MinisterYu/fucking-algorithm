@@ -3,6 +3,7 @@ from typing import List
 from collections import defaultdict, deque
 from collections import Counter
 
+
 # TODO 身高排序
 def reconstructQueue(people):
     # 对people进行排序，按照身高降序，ki升序
@@ -51,9 +52,52 @@ def findRightInterval(intervals: List[List[int]]):
 # bisect.insort_right(list1, [2, 6])
 # print(list1)
 # nums = 'abcdefg'
-# from functools import reduce#
-# print(reduce(lambda x, y: f'{x}->{y}', nums))
+from functools import reduce
+
+nums = [1, 2, 3, 4]
+# print(reduce(lambda x, y: abs(x - y), nums))
+print(reduce(lambda x, y: f'{x}-{y}', nums))
+
+from itertools import accumulate
+
+nums = [1, 2, 3, 4, 5]
+prefix_sum = list(accumulate(nums))  # 计算累积和
+
+print(prefix_sum)  # 输出 [1, 3, 6, 10, 15]
+
+from itertools import accumulate
+import operator
+
+n = 5
+factorial = list(accumulate(range(1, n + 1), operator.mul))  # 计算阶乘的累积乘积
+
+print(factorial)  # 输出 [1, 2, 6, 24, 120]
+
+s = '  hello world  '
+print(s.split())
 
 
-s = 'abcabc'
-print(s.split('a'))
+def removeDuplicates(s: str) -> str:
+    '''
+    输入："abbaca"
+    输出："ca"
+    '''
+    stack = []
+    for char in s:
+        while stack and stack[-1] == char:
+            stack.pop()
+
+        stack.append(char)
+    return ''.join(stack)
+
+removeDuplicates("abbaca")
+
+
+import heapq
+
+heap = []
+heapq.heappush(heap, (5, 'A', 1))
+heapq.heappush(heap, (2, 'B', 2))
+heapq.heappush(heap, (7, 'C', 3))
+
+print(heap)  # 输出: [(2, 'B'), (5, 'A'), (7, 'C')]

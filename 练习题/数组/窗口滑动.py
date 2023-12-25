@@ -5,6 +5,7 @@
 # @File    : 窗口滑动.py
 # @URL https://leetcode.cn/problems/MPnaiL/solutions/1503490/by-flix-0h27
 import collections
+from typing import List
 
 
 class Solution:
@@ -102,3 +103,74 @@ class Solution:
                 # return max(self.longestSubstring(substring, k) for substring in s.split(char))
 
         return len(s)
+
+    # todo 424. 替换后的最长重复字符
+    def characterReplacement(self, s: str, k: int) -> int:
+        n = len(s)
+        max_count = 0  # 记录最大出现次数的字符次数
+        max_length = 0  # 记录最长字符串的长度
+        counter = [0] * 26  # 计数器
+        left = 0  # 窗口边界
+        ord_A = ord('A')
+        for right in range(n):
+
+            index = ord(s[right]) - ord_A
+            counter[index] += 1
+
+            # 更新当前最大字符出现数
+            max_count = max(max_count, counter[index])
+
+            # 窗口长度不满足了,需要滑动窗口了
+            while right - left + 1 > max_count + k:
+                counter[ord(s[left]) - ord_A] -= 1
+                left += 1
+
+            max_length = max(max_length, right - left + 1)
+
+        return max_length
+
+    # https://leetcode.cn/problems/fruit-into-baskets/
+    def totalFruit(self, fruits: List[int]) -> int:
+        # 求数组中，最多包含2个不同数字的最大连续子序列
+        n = len(fruits)
+        if n < 3:
+            return n
+
+        counter = collections.Counter()
+        ans = 0
+        left = 0
+        for right, value in enumerate(fruits):
+            counter[value] += 1
+            while len(counter) > 2:
+                counter[fruits[left]] -= 1
+                if counter[fruits[left]] == 0:
+                    counter.pop(fruits[left])
+                left += 1
+            ans = max(ans, right - left + 1)
+        return ans
+
+    def numSubarraysWithSum(self, nums: List[int], goal: int) -> int:
+        ans = 0
+        n = len(nums)
+        left1 = left2 = 0
+        total1 = total2 = 0
+        for right in range(n):
+            total1 += nums[right]
+
+            while left1 <= right and goal < total1:
+                total1 -= nums[left1]
+                left1 += 1
+
+            total2 += nums[right]
+            while left2 <= right and goal <= total2:
+                total2 -= nums[left2]
+                left2 += 1
+
+            ans += left2 - left1
+
+        print(ans)
+
+
+if __name__ == '__main__':
+    so = Solution()
+    so.numSubarraysWithSum([0, 1, 0, 0], 0)
