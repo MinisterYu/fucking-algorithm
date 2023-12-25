@@ -1,7 +1,7 @@
 # coding:utf-8
 from typing import List
 from collections import defaultdict, deque
-
+from collections import Counter
 
 # TODO 身高排序
 def reconstructQueue(people):
@@ -46,17 +46,14 @@ def findRightInterval(intervals: List[List[int]]):
 
 
 # findRightInterval([[1,4],[2,3],[3,4]])
-list1 = [[1, 3], [3, 5], [7, 9]]
+# list1 = [[1, 3], [3, 5], [7, 9]]
+#
+# bisect.insort_right(list1, [2, 6])
+# print(list1)
+# nums = 'abcdefg'
+# from functools import reduce#
+# print(reduce(lambda x, y: f'{x}->{y}', nums))
 
-bisect.insort_right(list1, [2, 6])
-print(list1)
-nums = 'abcdefg'
-from functools import reduce
 
-print(reduce(lambda x, y: f'{x}->{y}', nums))
-
-nums = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-n = len(nums)
-for i in range(n-1, -1, -1):
-    for j in range(i, n):
-        print(f'i:{i}, j:{i}')
+s = 'abcabc'
+print(s.split('a'))

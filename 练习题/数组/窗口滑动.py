@@ -79,3 +79,26 @@ class Solution:
                 return True
 
         return False
+
+    # todo 395. 至少有 K 个重复字符的最长子串
+    def longestSubstring(self, s: str, k: int) -> int:
+        # 终止条件： 字符串的长度小于K，则最长结果返回为0
+        if len(s) < k:
+            return 0
+        '''
+        函数使用字典 counter 统计字符串 s 中每个字符的出现次数。
+        接下来，函数遍历字典 counter，找到第一个出现次数小于 k 的字符。
+        将字符串 s 根据该字符进行分割，得到左右两个子串。
+        然后，函数递归地对左右两个子串进行处理，分别找到满足条件的最长子串的长度
+        '''
+        counter = collections.Counter(s)
+        for char, count in counter.items():
+            if count < k:
+                substrings = s.split(char)
+                res = []
+                for substring in substrings:
+                    res.append(self.longestSubstring(substring, k))
+                return max(res)
+                # return max(self.longestSubstring(substring, k) for substring in s.split(char))
+
+        return len(s)
