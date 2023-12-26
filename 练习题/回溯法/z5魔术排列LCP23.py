@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/12/22 11:11
 # @Author  : MinisterYU
-# @File    : z5LCP23魔术排列.py
+# @File    : z5魔术排列LCP23.py
 from typing import List
 
 
