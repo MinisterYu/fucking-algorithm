@@ -2,7 +2,7 @@
 from typing import List
 from collections import defaultdict, deque
 from collections import Counter
-
+from functools import lru_cache
 
 # TODO 身高排序
 def reconstructQueue(people):

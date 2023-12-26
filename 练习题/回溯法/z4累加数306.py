@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/12/18 10:15
 # @Author  : MinisterYU
-# @File    : 累加数306.py
+# @File    : z4累加数306.py
 class Solution:
 
     # 112358, 1+1 = 2, 2 + 3 =5 , 3+5 = 8

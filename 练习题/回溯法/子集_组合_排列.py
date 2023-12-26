@@ -40,6 +40,7 @@ class Solution:
         return ans
 
     def 子集_元素无重复_不可重复选择(self, nums):
+        # todo 组合、子集： 元素无重复 不可重复选择
         # 给你输入一个 无重复元素 的数组 nums，其中每个元素最多使用一次，请你返回 nums 的所有子集。
         # https://leetcode.cn/problems/subsets/
         path = []
@@ -56,6 +57,7 @@ class Solution:
         return ans
 
     def 子集_组合_元素有重复_不可重复选择(self, nums):
+        # todo 组合、子集： 元素有重复 不可重复选择
         # 给你一个整数数组 nums，其中可能包含重复元素，请你返回该数组所有可能的子集。
         # https://leetcode.cn/problems/subsets-ii/
         nums.sort()  # 去重必须先对数组排序
@@ -76,6 +78,7 @@ class Solution:
         return ans
 
     def 子集_组合_元素无重复_可重复选择(self, candidates, target):
+        # todo 组合、子集： 元素无重复 可以重复选择
         # 给你一个无重复元素的整数数组 candidates 和一个目标和 target，找出 candidates 中可以使数字和为目标数 target 的所有组合。
         # candidates 中的每个数字可以无限制重复被选取。
         # https://leetcode.cn/problems/combination-sum/
@@ -100,6 +103,7 @@ class Solution:
         pass
 
     def 排列_元素无重复_不可重复选择(self, nums):
+        # todo 排列： 元素无重复 不重复选择
         # 给定一个不含重复数字的数组 nums，返回其所有可能的全排列。
         # https://leetcode.cn/problems/permutations/
 
@@ -125,6 +129,7 @@ class Solution:
         return ans
 
     def 排列_元素有重复_不可重复选择(self, nums):
+        # todo 排列： 元素有重复 不重复选择
         # 给你输入一个可包含重复数字的序列 nums，请你写一个算法，返回所有可能的全排列
         # https://leetcode.cn/problems/permutations-ii/
         nums.sort()  # 所有去重的，都必须先排序
@@ -154,6 +159,7 @@ class Solution:
         return ans
 
     def 排列_元素无重复_可重复选择(self, nums):
+        # todo 排列： 元素无重复 可重复选择
         # 无题目，used 不去重就是全排列可重复选择
         ans = []
         path = []

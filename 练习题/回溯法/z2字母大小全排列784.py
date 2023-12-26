@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/12/18 10:47
 # @Author  : MinisterYU
-# @File    : 字母大小全排列784.py
+# @File    : z2字母大小全排列784.py
 from typing import *
 
 '''
