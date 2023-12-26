@@ -101,3 +101,5 @@ heapq.heappush(heap, (2, 'B', 2))
 heapq.heappush(heap, (7, 'C', 3))
 
 print(heap)  # 输出: [(2, 'B'), (5, 'A'), (7, 'C')]
+
+# 位操作
