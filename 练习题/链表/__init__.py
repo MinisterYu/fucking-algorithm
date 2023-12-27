@@ -46,8 +46,10 @@ def mid(node):
         slow1 = slow1.next
     print(slow1.val)
 
+
 mid(node1)
 mid(node2)
+
 
 def mid2(node):
     fast1 = node
@@ -57,8 +59,10 @@ def mid2(node):
         slow1 = slow1.next
     print(slow1.val)
 
+
 mid2(node1)
 mid2(node2)
+
 
 # TODO 19. 删除链表的倒数第 N 个结点
 class Solution(object):
@@ -76,20 +80,32 @@ class Solution(object):
         slow.next = slow.next.next
         return dummy.next
 
-    # TODO 21. 合并两个有序链表
-    def mergeTwoLists(self, l1, l2):
-        dummy = ListNode()
-        cur = dummy
-        while l1 and l2:
-            if l1.val < l2.val:
-                cur.next = l1
-                l1 = l1.next
-            else:
-                cur.next = l2
-                l2 = l2.next
-            cur = cur.next
-        cur.next = l1 if l1 else l2
-        return dummy.next
+    # TODO 23. 合并K个有序链表
+    def mergeKLists(self, lists):
+        # 比对下排序的归并排序
+        if not lists:
+            return []
+        if len(lists) <= 1:
+            return lists[0]
+
+        mid = len(lists) // 2
+        left = self.mergeKLists(lists[:mid])
+        right = self.mergeKLists(lists[mid:])
+
+        return self.merge2Lists(left, right)
+
+    # TODO 递归合并2个有序列表
+    def merge2Lists(self, l1, l2):
+        if not l1:
+            return l2
+        if not l2:
+            return l1
+        if l1.val < l2.val:
+            l1.next = self.merge2Lists(l1.next, l2)
+            return l1
+        else:
+            l2.next = self.merge2Lists(l1, l2.next)
+            return l2
 
     # TODO 24. 两两交换节点
     def swapPairs(self, head):
@@ -102,6 +118,7 @@ class Solution(object):
         head.next = self.swapPairs(next_pairs)
 
         return new_head
+
     # TODO 24.  K个一组交换
     # 通用的K个一组翻转算法
     def swapPairs_2(self, head):
