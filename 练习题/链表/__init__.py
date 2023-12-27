@@ -47,8 +47,8 @@ def mid(node):
     print(slow1.val)
 
 
-mid(node1)
-mid(node2)
+# mid(node1)
+# mid(node2)
 
 
 def mid2(node):
@@ -60,8 +60,8 @@ def mid2(node):
     print(slow1.val)
 
 
-mid2(node1)
-mid2(node2)
+# mid2(node1)
+# mid2(node2)
 
 
 # TODO 19. 删除链表的倒数第 N 个结点
@@ -121,51 +121,8 @@ class Solution(object):
 
         return head
 
-    # TODO 86. 分隔链表, 给一个节点值x,小于x的排前面，大于的排后面
-    def partition(self, head, x):
-        dummy1 = ListNode()
-        dummy2 = ListNode()
-        cur1 = dummy1
-        cur2 = dummy2
 
-        cur = head
-        while cur:
-            if cur.val < x:
-                cur1.next = cur
-                cur1 = cur1.next
-            else:
-                cur2.next = cur
-                cur2 = cur2.next
 
-            cur = cur.next
-
-        cur2.next = None
-        cur1.next = dummy2.next
-        return dummy1.next
-
-    # TODO 92. 反转链表 II， 中间一部分链表反转
-    def reverseBetween(self, head, left, right):
-
-        dummy = ListNode(next=head)
-        pre_0 = dummy
-
-        for i in range(1, left):
-            pre_0 = pre_0.next
-
-        revers_head = pre_0.next
-
-        pre = None
-        cur = revers_head
-
-        for i in range(left, right + 1):
-            tmp = cur.next
-            cur.next = pre
-            pre = cur
-            cur = tmp
-
-        pre_0.next = pre
-        revers_head.next = cur
-        return dummy.next
 
     # TODO 环形链表
     def detectCycle(self, head: ListNode) -> ListNode:

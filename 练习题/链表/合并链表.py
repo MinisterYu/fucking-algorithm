@@ -20,7 +20,7 @@ class Solution:
             list1.next = self.mergeTwoLists(list1.next, list2)
             return list1
         else:
-            list2.next = self.mergeTwoLists((list1, list2.next))
+            list2.next = self.mergeTwoLists(list1, list2.next)
             return list2
 
     def mergeTwoLists2(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
@@ -55,3 +55,26 @@ class Solution:
         right = self.mergeKLists(lists[mid:])
 
         return self.mergeTwoLists(left, right)
+
+    def partition(self, head, x):
+        # https://leetcode.cn/problems/partition-list/description/
+        # TODO 分隔链表, 给一个节点值x,小于x的排前面，大于的排后面, 循环写法
+        dummy1 = ListNode()
+        dummy2 = ListNode()
+        cur1 = dummy1
+        cur2 = dummy2
+
+        cur = head
+        while cur:
+            if cur.val < x:
+                cur1.next = cur
+                cur1 = cur1.next
+            else:
+                cur2.next = cur
+                cur2 = cur2.next
+
+            cur = cur.next
+
+        cur2.next = None
+        cur1.next = dummy2.next
+        return dummy1.next

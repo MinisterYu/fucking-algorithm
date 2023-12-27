@@ -10,6 +10,7 @@ import operator
 import collections
 import functools
 import itertools
+from 练习题.链表 import to_list, to_link, ListNode
 
 
 # TODO 身高排序
@@ -33,14 +34,26 @@ def reconstructQueue(people):
 # result = reconstructQueue(people)
 # print(result)
 
-def isWinner(player1: List[int], player2: List[int]) -> int:
-    s1, s2 = 0, 0
-    pre_index1, pre_index2 = -3, -3
-    for cur_index in range(len(player1)):
-        s1 += player1[cur_index] * (2 if cur_index - pre_index1 <= 2 else 1)
-        s2 += player2[cur_index] * (2 if cur_index - pre_index2 <= 2 else 1)
+list1 = [1, 2, 3, 4, 5]
+link1 = to_link(list1)
 
-        pre_index1 = cur_index if player1[cur_index] == 10 else pre_index1
-        pre_index2 = cur_index if player2[cur_index] == 10 else pre_index2
+cur = ListNode()
+curr = cur
+curr_1 = cur
+def travers_1(head):
+    global curr, curr_1
+    if not head:
+        return
+    curr_1.next = ListNode(val=head.val)
+    curr_1 = curr_1.next
+    travers_1(head.next)
+    # curr.next = ListNode(val=head.val)
+    # curr = curr.next
 
-    return 1 if s1 > s2 else 2 if s1 < s2 else 0
+travers_1(link1)
+print(to_list(cur.next))
+
+
+
+
+
