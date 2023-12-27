@@ -26,20 +26,20 @@ class Solution:
                 stack.append(node.left)
         return res
 
-    def preorderTraversal_遍历解法(self, root: Optional[TreeNode]) -> List[int]:
+    def preorderTraversal_递归解法(self, root: Optional[TreeNode]) -> List[int]:
         res = []
         if not root:
             return res
         # 前序遍历的结果，root.val 在第一个
         res.append(root.val)
         # 利用函数定义，后面接着左子树的前序遍历结果
-        res.extend(self.preorderTraverse(root.left))
+        res.extend(self.preorderTraversal_遍历解法(root.left))
         # 利用函数定义，最后接着右子树的前序遍历结果
-        res.extend(self.preorderTraverse(root.right))
+        res.extend(self.preorderTraversal_遍历解法(root.right))
 
         return res
 
-    def preorderTraversal_分解解法(self, root: Optional[TreeNode]) -> List[int]:
+    def preorderTraversal_遍历解法(self, root: Optional[TreeNode]) -> List[int]:
         res = []
 
         def traverse(root):
