@@ -6,3 +6,13 @@
 from 练习题.二叉树 import TreeNode
 from typing import Optional, List
 from collections import deque
+
+class Solution:
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        pass
+
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        pass
+
+    def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        pass
