@@ -38,12 +38,14 @@ node2 = to_link([1, 2, 3, 4, 5])
 
 
 def mid(node):
+    print(to_list(node))
     fast1 = node
     slow1 = node
 
     while fast1 and fast1.next:
         fast1 = fast1.next.next
         slow1 = slow1.next
+    print('fast1 and fast1.next')
     print(slow1.val)
 
 
@@ -52,11 +54,13 @@ def mid(node):
 
 
 def mid2(node):
+    print(to_list(node))
     fast1 = node
     slow1 = node
     while fast1.next and fast1.next.next:
         fast1 = fast1.next.next
         slow1 = slow1.next
+    print('fast1.next and fast1.next.next')
     print(slow1.val)
 
 
