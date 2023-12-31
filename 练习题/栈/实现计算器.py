@@ -43,4 +43,4 @@ class Solution:
 
 if __name__ == '__main__':
     so = Solution()
-    so.calculate('1+1')
+    so.calculate("(1+(4+5+2)-3)+(6+8)")

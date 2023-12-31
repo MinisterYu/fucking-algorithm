@@ -149,6 +149,7 @@ class Solution:
                     continue
                 if used[i]:
                     continue
+
                 used[i] = True
                 path.append(nums[i])
                 backtrack(used, nums, ans, path)

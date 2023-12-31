@@ -19,6 +19,18 @@ def nextGreaterElement(nums):
 
 
 class Solution:
+
+    def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
+        # https://leetcode.cn/problems/daily-temperatures/
+        res = [0] * len(temperatures)
+        stack = []
+        for i in range(len(temperatures)):
+            while stack and temperatures[stack[-1]] < temperatures[i]:
+                index = stack.pop()
+                res[index] = i - index
+            stack.append(i)
+        return res
+
     def finalPrices(self, prices: List[int]) -> List[int]:
         '''
         给你一个数组 prices ，其中 prices[i] 是商店里第 i 件商品的价格。
@@ -53,7 +65,6 @@ class Solution:
             # stack.append(i)  # 进栈，接受之后的身高判定吧！
             stack.append(nums[i])
 
-        print(result)
         return result
 
     def next_greater_element(self, nums):
@@ -82,12 +93,4 @@ class Solution:
             stack.append(i)  # 当前元素入栈，等待找到它的下一个更大元素
         print(result)
         return result
-
-
-if __name__ == '__main__':
-    solution = Solution()
-    # solution.finalPrices([8, 4, 6, 2, 3])
-    print([4, 5, 2, 10, 8])
-    solution.next_greater_element([4, 5, 2, 10, 8])
-    solution.next_greater_element_reversed([4, 5, 2, 10, 8])
 
