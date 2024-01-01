@@ -170,7 +170,36 @@ class Solution:
 
         print(ans)
 
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        # https://leetcode.cn/problems/find-all-anagrams-in-a-string/
+        from collections import  defaultdict
+        res = []
+        need = n = len(p)
+        counter = defaultdict(int)
+        for c in p:
+            counter[c] += 1
+
+        for right, char in enumerate(s):
+            if char in counter:
+                if counter[char] > 0:
+                    need -= 1
+                counter[char] -= 1
+
+            left = right - n
+            if left >= 0:
+                char = s[left]
+                if char in counter:
+                    if counter[char] >= 0:
+                        need += 1
+                counter[char] += 1
+
+            if need == 0:
+                res.append(right - n + 1)
+        return res
+
+
 
 if __name__ == '__main__':
     so = Solution()
-    so.numSubarraysWithSum([0, 1, 0, 0], 0)
+    # so.numSubarraysWithSum([0, 1, 0, 0], 0)
+    so.findAnagrams("cbaebabacd", 'abc')
