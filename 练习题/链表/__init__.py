@@ -68,75 +68,15 @@ def mid2(node):
 # mid2(node2)
 
 
-# TODO 19. 删除链表的倒数第 N 个结点
-class Solution(object):
-    def removeNthFromEnd(self, head, n):
-        dummy = ListNode(next=head)
-        fast = dummy
-        slow = dummy
-        # fast 先走N步
-        for i in range(n):
-            fast = fast.next
-        # fast 到尾部的时候，slow整好到导数N步
-        while fast and fast.next:
-            fast = fast.next
-            slow = slow.next
-        slow.next = slow.next.next
-        return dummy.next
-
-    # TODO 61. 旋转列表
-    def rotateRight(self, head, k):
-        count = 1
-        cur = head
-        while cur.next:
-            cur = cur.next
-            count += 1
-        move = count - k % count
-
-        cur.next = head
-        for _ in range(move):
-            cur = cur.next
-
-        ret = cur.next
-        cur.next = None
-        return ret
-
-    # TODO 82. 删除排序链表中的重复元素，如果元素重复则全部删除 ，（11123）-> 23
-    def deleteDuplicates(self, head):
-        dummy = ListNode(next=head)
-        cur = dummy
-        while cur.next and cur.next.next:
-            if cur.next.val == cur.next.next.val:
-                val = cur.next.val
-                while cur.next and cur.next.val == val:
-                    cur.next = cur.next.next
-            else:
-                cur = cur.next
-        return dummy.next
-
-    # TODO 83. 删除排序链表中的重复元素， 删除后不重复 11123 -> 123
-    def deleteDuplicates(self, head):
-        cur = head
-        while cur and cur.next:
-            if cur.val == cur.next.val:
-                cur.next = cur.next.next
-            else:
-                cur = cur.next
-
-        return head
 
 
 
 
-    # TODO 环形链表
-    def detectCycle(self, head: ListNode) -> ListNode:
-        slow, fast = head, head
-        while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-            if fast.val == slow.val:
-                return fast
-        return None
+
+
+
+
+
 
     # TODO 143. 重排链表: 1，2，3，4，5 排列成 1，5，2，4，3
     def reorderList(self, head):

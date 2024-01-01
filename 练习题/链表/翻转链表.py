@@ -19,19 +19,6 @@ class Solution:
         head.next = None
         return last
 
-    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # https://leetcode.cn/problems/swap-nodes-in-pairs/
-        # todo: 两两翻转节点,递归写法
-        if not head or not head.next:
-            return head
-
-        next_pair = head.next.next
-        new_head = head.next
-        new_head.next = head
-
-        head.next = self.swapPairs(next_pair)
-        return new_head
-
     def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # https://leetcode.cn/problems/reverse-linked-list/
         # todo 反转一个链表,循环写法
@@ -69,6 +56,19 @@ class Solution:
         rev_head.next = rev_cur
 
         return dummy.next
+
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        # https://leetcode.cn/problems/swap-nodes-in-pairs/
+        # todo: 两两翻转节点,递归写法
+        if not head or not head.next:
+            return head
+
+        next_pair = head.next.next
+        new_head = head.next
+        new_head.next = head
+
+        head.next = self.swapPairs(next_pair)
+        return new_head
 
     def swapPairs2(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # https://leetcode.cn/problems/swap-nodes-in-pairs/
@@ -128,3 +128,20 @@ class Solution:
             p0 = next_
 
         return dummy.next
+
+    # TODO 61. 旋转列表
+    def rotateRight(self, head, k):
+        count = 1
+        cur = head
+        while cur.next:
+            cur = cur.next
+            count += 1
+        move = count - k % count
+
+        cur.next = head
+        for _ in range(move):
+            cur = cur.next
+
+        ret = cur.next
+        cur.next = None
+        return ret

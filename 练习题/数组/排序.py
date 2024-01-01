@@ -3,6 +3,7 @@
 # @Time    : 2024/1/1 13:07
 # @Author  : MinisterYU
 # @File    : 排序.py
+import heapq
 from typing import List
 from collections import Counter
 
@@ -37,5 +38,18 @@ def containsNearbyAlmostDuplicate(nums: List[int], indexDiff: int, valueDiff: in
 
     return False
 
+#
+# print(containsNearbyAlmostDuplicate(nums=[8, 7, 15, 1, 6, 1, 9, 15], indexDiff=1, valueDiff=3))
+if __name__ == '__main__':
+    import random
+    heap = []
+    visited = set()
+    for i in range(20):
+        value = random.randint(0, 100)
+        if value not in visited:
+            heapq.heappush(heap, value)
+            visited.add(value)
+    print(heap)
+    while heap:
+        print(heapq.heappop(heap))
 
-print(containsNearbyAlmostDuplicate(nums=[8, 7, 15, 1, 6, 1, 9, 15], indexDiff=1, valueDiff=3))
