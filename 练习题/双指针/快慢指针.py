@@ -5,6 +5,7 @@
 # @File    : 快慢指针.py
 from typing import List
 
+
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         # https://leetcode.cn/problems/remove-duplicates-from-sorted-array/
@@ -28,3 +29,34 @@ class Solution:
             fast += 1
 
         return slow
+
+    def numSubarrayProductLessThanK(self, nums, k):
+        # TODO 713. 乘积小于 K 的子数组 | 给你一个整数数组 nums 和一个整数 k ，请你返回子数组内所有元素的乘积严格小于 k 的连续子数组的数目。
+        # https://leetcode.cn/problems/subarray-product-less-than-k/
+        if k <= 1:
+            return 0
+
+        ans = 0
+        left = 0
+        count = 1
+        for right, value in enumerate(nums):
+            count *= value
+            while count >= k:
+                count /= nums[left]
+                left += 1
+            ans += right - left + 1
+        return ans
+
+    def minSubArrayLen(self, target, nums):
+        # TODO 209. 长度最小的子数组 : 固定左指针，右指针一直到边界，再缩小左指针
+        # https://leetcode.cn/problems/minimum-size-subarray-sum/description/
+        left = 0
+        ans = len(nums) + 1
+        count = 0
+        for right, value in enumerate(nums):
+            count += value
+            while count >= target:
+                ans = min(ans, right - left + 1)
+                count -= nums[left]
+                left += 1
+        return ans if ans < len(nums) + 1 else 0
