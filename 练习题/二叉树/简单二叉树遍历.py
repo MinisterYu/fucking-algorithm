@@ -6,7 +6,6 @@
 from 练习题.二叉树 import TreeNode, arrayToTree
 from typing import Optional, List
 
-
 class Solution:
 
     # 统计二叉树的节点个数
@@ -28,8 +27,9 @@ class Solution:
 
         return False
 
-    # 二叉树的最大深度
+
     def maxDepth(self, root: Optional[TreeNode]) -> int:
+        # TODO 二叉树的最大深度
         if not root:
             return 0
 

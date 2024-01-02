@@ -164,23 +164,26 @@ class Solution:
         Do not return anything, modify root in-place instead.
         https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/
         """
-        # if not root:
-        #     return None
-        # self.flatten(root.right)
-        # self.flatten(root.left)
-        #
-        # root.right = self.pre_node
-        # root.left = None
-        # pre = root
-        # if root.left:
-        #     pre = root.left
-        #     while pre.right:
-        #         pre = pre.right
-        #     pre.right = root.right
-        #     root.right = root.left
-        #     root.left = None
-        # print('-' * 10)
-        # printTree(root)
+        if not root:
+            return None
+
+            # 递归展开左子树和右子树
+        left = self.flatten(root.left)
+        right = self.flatten(root.right)
+
+        # 将左子树插入到根节点和右子树之间
+        if left:
+            root.right = left
+            root.left = None
+
+            # 找到左子树的最右侧节点
+            while left.right:
+                left = left.right
+
+            # 将右子树插入到左子树的最右侧节点之后
+            left.right = right
+
+        return root
 
         # 第二种解法，遍历
 
@@ -356,6 +359,5 @@ if __name__ == '__main__':
     # printTree(root)
     # so.findFrequentTreeSum(root)
     # root = so.sortedArrayToBST([1, 2, 3, 4, 5, 6, 7])
-    root = arrayToTree([4,2,1,3,6,5,7])
+    root = arrayToTree([4, 2, 1, 3, 6, 5, 7])
     printTree(root)
-
