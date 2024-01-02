@@ -9,23 +9,32 @@ import operator
 import functools
 import heapq
 
-# accumulate 前缀和
-data = [1, 2, 3, 4, 5, 6, 7]
-res = [0] + list(itertools.accumulate(data, operator.add))
-print(res)
+#
+# # accumulate 前缀和
+# data = [1, 2, 3, 4, 5, 6, 7]
+# res = [0] + list(itertools.accumulate(data, operator.add))
+# print(res)
+#
+# # functools.reduce 迭代计算
+# res = functools.reduce(lambda x, y: x + y, [1, 2, 3, 4, 5])
+# print(res)
+#
+# dict_ = collections.defaultdict(lambda: 100)
+# dict_[1] = 2
+# print(dict_)
+# print(dict_[2])
+#
+# heap = []
+# heapq.heappush(heap, [1, 'a'])
+# heapq.heappush(heap, [1, 'b'])
+# heapq.heappush(heap, [2, 'a'])
+# heapq.heappush(heap, [2, 'a'])
+# print(heap)
 
-# functools.reduce 迭代计算
-res = functools.reduce(lambda x, y: x + y, [1, 2, 3, 4, 5])
-print(res)
+nums = [1, 4, 2, 5, 3]
+n = len(nums)
+for i in range(n):
+    print(n - i + 1)
+    for j in range(1, n - i + 1, 2):
+        print(nums[i: i + j])
 
-dict_ = collections.defaultdict(lambda: 100)
-dict_[1] = 2
-print(dict_)
-print(dict_[2])
-
-heap = []
-heapq.heappush(heap, [1, 'a'])
-heapq.heappush(heap, [1, 'b'])
-heapq.heappush(heap, [2, 'a'])
-heapq.heappush(heap, [2, 'a'])
-print(heap)

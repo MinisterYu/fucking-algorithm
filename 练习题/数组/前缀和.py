@@ -109,7 +109,30 @@ class Solution:
         print(count)
         return count
 
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        # https://leetcode.cn/problems/car-pooling/
+        passengers = [0] * (max(i[2] for i in trips) + 1)
+
+        for trip in trips:
+            passengers_count = trip[0]
+            start = trip[1]
+            end = trip[2]
+
+            passengers[start] += passengers_count  # 有顾客上车了
+            passengers[end] -= passengers_count # 有顾客下车了
+
+        total_passengers = 0
+        for count in passengers:
+            total_passengers += count
+            if total_passengers > capacity:
+                return False
+
+        return True
+
+
 
 if __name__ == '__main__':
     so = Solution()
-    so.subarraySum([4, 2, 1], 3)
+    # so.subarraySum([4, 2, 1], 3)
+    nums = [[2, 1, 5], [3, 3, 7]]
+    print(max( i[2] for i in nums  ))
