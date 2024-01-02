@@ -10,7 +10,7 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         # https://leetcode.cn/problems/word-search/
         # 二维数组搜索，与岛屿问题类似
-        
+
         m, n = len(board), len(board[0])
         visited = [[False] * n for _ in range(m)]
         dir = [(1, 0), (-1, 0), (0, 1), (0, -1)]
