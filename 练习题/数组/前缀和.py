@@ -3,6 +3,7 @@
 # @Time    : 2024/1/2 16:33
 # @Author  : MinisterYU
 # @File    : 前缀和.py
+import itertools
 from typing import List
 from itertools import accumulate
 
@@ -119,7 +120,7 @@ class Solution:
             end = trip[2]
 
             passengers[start] += passengers_count  # 有顾客上车了
-            passengers[end] -= passengers_count # 有顾客下车了
+            passengers[end] -= passengers_count  # 有顾客下车了
 
         total_passengers = 0
         for count in passengers:
@@ -129,10 +130,47 @@ class Solution:
 
         return True
 
+    def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
+        count = 0
+        stops = {}
+        for index, char in enumerate(garbage):
+            count += len(char)
+            for c in char:
+                stops[c] = index
+
+        prefix = list(itertools.accumulate(travel))
+        print(prefix, stops)
+        for i in stops.values():
+            if i - 1 >= 0:
+                count += prefix[i - 1]
+        return count
+
+    def maxSum(self, grid: List[List[int]]) -> int:
+        '''
+        因为数组是有序的, 对数任意一个数nums[i],
+        在数nums[i]左边的数比nums[i]小, 在nums[i]右边的数比nums[i]大,
+        因此, 计算nums[i]和其他数的差绝对值之和可以分割为两部分来进行计算.
+        首先计算前缀和数组prefixSum[], prefixSum[i]表示前i个数之和.
+        对于nums[i]的左半部分, nums[i]与其他数的差绝对值之和可计算为:
+
+        sumOfLeftDifferences = (i+1)*nums[i]-prefixSum[i];
+        对于nums[i]的右半部分, nums[i]与其他数的绝对值之和可计算为:
+        sumOfRightDifferences = prefixSum[nums.length-1]-prefixSum[i]-nums[i]*(nums.length-1-i);
+        所以, 当前nums[i]与左右其他数的绝对值之和为:
+        sumOfDifferences = sumOfLeftDifferences+sumOfRightDifferences;
+        '''
 
 
 if __name__ == '__main__':
     so = Solution()
     # so.subarraySum([4, 2, 1], 3)
-    nums = [[2, 1, 5], [3, 3, 7]]
-    print(max( i[2] for i in nums  ))
+    # nums = [[2, 1, 5], [3, 3, 7]]
+    # print(max( i[2] for i in nums  ))
+    # res = so.garbageCollection(garbage=["G", "M"], travel=[1])
+
+    nums1 = [1, 2, 3, 4, 5]
+    nums2 = [3, 4, 5, 6, 7]
+    print(set(nums1) | set(nums2))
+    print(set(nums1) & set(nums2))
+    print(set(nums1) ^ set(nums2))
+    print("   blue is sky the    ".split())
