@@ -4,9 +4,31 @@
 # @Author  : MinisterYU
 # @File    : 最值问题.py
 import functools
+from typing import List
 
 
 class Solution:
+
+    def countSubstrings(self, s: str) -> int:
+        # https://leetcode.cn/problems/palindromic-substrings/
+        n = len(s)
+        count = 0
+        dp = [[False] * n for _ in range(n)]  # dp[i][j] 为从i到j为回文子串
+
+        for i in range(n - 1, -1, -1):
+            for j in range(i, len(s)):
+                if i == j:  # 如果是同个字符，为真
+                    dp[i][j] = True
+                    count += 1
+                if s[i] == s[j] and j - i == 1:  # 如果两个字符相等，且相距只有一个字符，为真
+                    dp[i][j] = True
+                    count += 1
+                if s[i] == s[j] and j - i > 1 and dp[i + 1][j - 1] == True:
+                    # 如果两个字符相等，且相距>1，且前一个状态为真，为真
+                    dp[i][j] = True
+                    count += 1
+        return count
+
     def longestValidParentheses(self, s: str) -> int:
         # https://leetcode.cn/problems/longest-valid-parentheses/
         '''
@@ -74,6 +96,7 @@ class Solution:
             replace = traverse(i + 1, j + 1)
 
             return min(insert, delete, replace) + 1
+
         return traverse(0, 0)
 
         # 动归解决
@@ -100,7 +123,108 @@ class Solution:
 
         return dp[-1][-1]
 
+    def maxProduct(self, nums: List[int]) -> int:
+        # https://leetcode.cn/problems/maximum-product-subarray/
+        '''
+        给你一个整数数组 nums ，请你找出数组中乘积最大的非空连续子数组（该子数组中至少包含一个数字），并返回该子数组所对应的乘积。
+        1 <= nums.length <= 2 * 104
+        -10 <= nums[i] <= 10
+        nums 的任何前缀或后缀的乘积都 保证 是一个 32-位 整数
+        '''
+        if not nums:
+            return 0
+
+        max_product = nums[0]
+        min_product = nums[0]
+        result = max_product
+
+        for i in range(1, len(nums)):
+            if nums[i] < 0:  # 如果 nums[i] 是负数，交换 max_product 和 min_product 的值
+                max_product, min_product = min_product, max_product
+
+            max_product = max(nums[i], max_product * nums[i])
+            min_product = min(nums[i], min_product * nums[i])
+            result = max(result, max_product)
+
+        return result
+
+    def integerBreak(self, n: int) -> int:
+        # https://leetcode.cn/problems/integer-break/
+        '''给定一个正整数 n ，将其拆分为 k 个 正整数 的和（ k >= 2 ），并使这些整数的乘积最大化。
+        返回 你可以获得的最大乘积 。 n <= 2 '''
+
+        dp = [0] * (n + 1)
+        dp[0] = 0
+        dp[1] = 0
+        for i in range(2, n + 1):
+            for j in range(i):
+                dp[i] = max(dp[i], (i - j) * j, dp[i - j] * j)
+                # dp[i] = max(dp[i], j * (i - j), j * dp[i - j])
+        print(dp)
+        return max(dp)
+
+    def minCut(self, s: str) -> int:
+        # https://leetcode.cn/problems/palindrome-partitioning-ii/
+        # 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。返回符合要求的 最少分割次数 。
+        n = len(s)
+        dp = [[True] * n for _ in range(n)]
+        for i in range(n - 1, -1, -1):
+            for j in range(i + 1, n):
+                dp[i][j] = (s[i] == s[j]) and dp[i + 1][j - 1]
+
+        for i in dp:
+            print(i)
+
+        dp_f = [float('inf')] * n
+        for i in range(n):
+            if dp[0][i]:
+                dp_f[i] = 0
+            else:
+                for j in range(i):
+                    if dp[j + 1][i]:
+                        dp_f[i] = min(dp_f[i], dp_f[j] + 1)
+
+        return dp_f[n - 1]
+
+    def palindrome(self, s: str) -> int:
+        # https://leetcode.cn/problems/palindrome-partitioning-ii/
+        # 给你一个字符串 s，请你将 s 分割成一些子串，使每个子串都是回文。返回符合要求的 最少分割次数 。
+        n = len(s)
+        count = 1
+        dp = [['_'] * n for _ in range(n)]
+        for i in range(n - 1, -1, -1):  # 从下往上遍历
+            for j in range(i, n):  # 从左往右遍历
+                if (s[i] == s[j]) and (j - i < 2 or dp[i + 1][j - 1] != '_'):
+                    dp[i][j] = s[i]
+                    count += 1
+            print(dp[i])
+        print('------')
+        for i in dp:
+            print(i)
+
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        books.sort(key=lambda x: (x[0], -x[1]))  # 按宽度、高度从小到大排序
+        print(books.sort())
+        dp = [0] * len(books)  # dp[i] 表示放入第i本书的总宽度
+        dp[0] = books[0][0]
+        height = [books[0][1]]
+
+        for i in range(1, len(books)):
+            if books[i][0] + dp[i - 1] <= shelfWidth:
+                height[-1] = max(height[-1], books[i][1])
+                dp[i] = books[i][0] + dp[i - 1]
+
+            if books[i][0] + dp[i - 1] > shelfWidth:  # 如果这一本
+                height.append(books[i][1])
+                dp[i] = books[i][0]
+        print(height)
+        return sum(height)
+
 
 if __name__ == '__main__':
     so = Solution()
-    so.minDistance("horse", "ros")
+    # so.minDistance("horse", "ros")
+    # so.maxProduct([2, 3, -2, 4])
+    # so.integerBreak(10)
+    # so.palindrome('aacadca')
+    so.minHeightShelves(books=[[1, 1], [2, 3], [2, 3], [1, 1], [1, 1], [1, 1], [1, 2]], shelfWidth=4)

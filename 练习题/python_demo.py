@@ -103,7 +103,11 @@ def removeDuplicates(s: str) -> str:
 
 removeDuplicates('abbaca')
 
-s = '123456789'
-s = list(s)
-for i in range(len(s) - 1, 0, -1):
-    print(s[i - 1], s[i])
+# s = '123456789'
+# s = list(s)
+# for i in range(len(s) - 1, 0, -1):
+#     print(s[i - 1], s[i])
+
+from itertools import pairwise
+a = pairwise('000111000111')
+print(list(a))

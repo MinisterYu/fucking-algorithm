@@ -73,10 +73,12 @@ class Solution:
 
         dp = [[0] * (len(nums2) + 1) for _ in range(len(nums1) + 1)]
         ans = 0
+        max_i = []
         for i in range(1, len(nums1) + 1):
             for j in range(1, len(nums2) + 1):
                 if nums1[i - 1] == nums2[j - 1]:  # 判断条件
                     dp[i][j] = dp[i - 1][j - 1] + 1
+
             ans = max(ans, max(dp[i]))
 
         ''' dp:
@@ -87,6 +89,14 @@ class Solution:
         [0, 1, 2, 3, 4, 4]
         [0, 1, 2, 3, 4, 5]
         '''
+        trace = []
+        for i in range(len(nums1) + 1, 0, -1):
+            for j in range(len(nums2) + 1, 0, -1):
+                if dp[i][j] == ans:
+                    trace.append([i, j])
+
+
+
         return ans
 
     # TODO 1143. 最长子序列 2维 | "ace" 是 "abcde" 的子序列，但 "aec" 不是 "abcde" 的子序列。
