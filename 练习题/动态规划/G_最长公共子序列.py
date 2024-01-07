@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/12/21 10:20
 # @Author  : MinisterYU
-# @File    : 最长公共子序列.py
+# @File    : G_最长公共子序列.py
 class Solution:
     def LCS(self, s1, s2):
         # write code here

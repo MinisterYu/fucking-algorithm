@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2024/1/4 09:52
 # @Author  : MinisterYU
-# @File    : 最值问题.py
+# @File    : A_最值问题.py
 import functools
 from typing import List
 

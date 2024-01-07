@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time    : 2023/12/6 22:09
 # @Author  : MinisterYU
-# @File    : 股票问题.py
+# @File    : F_股票问题.py
 
 
 prices = [1, 2, 3, 4, 5, 6]
