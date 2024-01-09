@@ -323,6 +323,41 @@ class Solution:
         print(self.memo)
         return [i for i in self.memo if self.memo[i] == max_count]
 
+    def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
+        # https://leetcode.cn/problems/smallest-string-starting-from-leaf/
+        '''
+        给定一颗根结点为 root 的二叉树，树中的每一个结点都有一个 [0, 25] 范围内的值，分别代表字母 'a' 到 'z'。
+        返回 按字典序最小 的字符串，该字符串从这棵树的一个叶结点开始，到根结点结束。
+        '''
+        if not root:
+            return ""
+
+        def dfs(node, path):
+            if not node:
+                return ""
+
+            # 将当前节点的值转换为对应的字母，并添加到路径中
+            path = chr(node.val + ord('a')) + path
+
+            if not node.left and not node.right:
+                # 如果当前节点是叶节点，则返回当前路径作为一个候选结果
+                return path
+
+            # 递归地遍历左子树和右子树，并返回字典序最小的路径
+            left_path = dfs(node.left, path)
+            right_path = dfs(node.right, path)
+
+            if left_path and right_path:
+                # 如果左子树和右子树都有路径，则返回字典序最小的路径
+                return min(left_path, right_path)
+            elif left_path:
+                # 如果只有左子树有路径，则返回左子树的路径
+                return left_path
+            else:
+                # 如果只有右子树有路径，则返回右子树的路径
+                return right_path
+
+        return dfs(root, "")
 
 if __name__ == '__main__':
     so = Solution()
@@ -359,5 +394,6 @@ if __name__ == '__main__':
     # printTree(root)
     # so.findFrequentTreeSum(root)
     # root = so.sortedArrayToBST([1, 2, 3, 4, 5, 6, 7])
-    root = arrayToTree([4, 2, 1, 3, 6, 5, 7])
-    printTree(root)
+    # root = arrayToTree([4, 2, 1, 3, 6, 5, 7])
+    # printTree(root)
+    so.smallestFromLeaf(arrayToTree([0, 1, 2, 3, 4, 3, 4]))

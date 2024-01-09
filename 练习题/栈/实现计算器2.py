@@ -23,7 +23,7 @@ class Solution:
                 # 遇到符号了
                 # if (not char.isdigit() and char != ' ') or not queue:
                 if char in '+-*/()' or not queue:
-                    self.memo.append(sign)
+                    # self.memo.append(sign)
                     # print(f'char: {char} in "+-" is {char in "+-"}')
                     # if char in '+-' or not queue:
                     if sign == '+':  # 每次计算，取上一次的符号
