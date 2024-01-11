@@ -24,6 +24,23 @@ class Solution:
         print(sum(dp[-1]))
         return sum(dp[-1])
 
+    def countSubstrings(self, s: str) -> int:
+        n = len(s)
+        count = []
+        path = []
+
+        def backtrack(index):
+            if index == n:
+                return
+
+            for i in range(index, n):
+                if s[index: i + 1] == s[index: i + 1][::-1]:
+                    count.append(f'{index}:{i + 1}')
+                    backtrack(i + 1)
+
+        backtrack(0)
+        print(count)
+
     def getWordsInLongestSubsequence(self, n: int, words: List[str], groups: List[int]) -> List[str]:
         # https://leetcode.cn/problems/longest-unequal-adjacent-groups-subsequence-i/
         # 给你一个整数 n 和一个下标从 0 开始的字符串数组 words ，和一个下标从 0 开始的 二进制 数组 groups ，两个数组长度都是 n 。
@@ -47,15 +64,17 @@ class Solution:
         '''
         self.count = 0
         self.visited = [False] * n
+
         def backtrack(index):
             if index == n + 1:
                 self.count += 1
                 return
             for i in range(1, n + 1):
-                if not self.visited[i -1] and (i % index == 0 or index % i == 0):
+                if not self.visited[i - 1] and (i % index == 0 or index % i == 0):
                     self.visited[i - 1] = True
                     backtrack(index + 1)
                     self.visited[i - 1] = False
+
         backtrack(1)
         return self.count
 
@@ -70,9 +89,35 @@ class Solution:
                 dp[j] = dp[j] + dp[j - coins[i]]
         return dp[-1]
 
+    def longestPalindromeSubseq(self, s: str) -> int:
+        # https://leetcode.cn/problems/longest-palindromic-subsequence/
+        n = len(s)
+        dp = [[0] * n for _ in range(n)]
+        for i in range(n):
+            dp[i][i] = 1
+        for i in range(n - 1, -1, -1):
+            for j in range(i + 1, n):
+                if s[i] == s[j]:
+                    dp[i][j] = dp[i + 1][j - 1] + 2
+                else:
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
+        # n = len(s)
+        # dp = [[0] * n for _ in range(n)]
+        # for i in range(n - 1, -1, -1):
+        #     for j in range(i, n):
+        #         if i == j:
+        #             dp[i][j] = 1
+        #         elif s[i] == s[j]:
+        #             dp[i][j] = dp[i + 1][j - 1] + 2
+        #         else:
+        #             dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
 
+        for i in dp:
+            print(i)
 
 
 if __name__ == '__main__':
     so = Solution()
-    so.countVowelStrings(2)
+    # so.countVowelStrings(2)
+    # so.countSubstrings('aaa')
+    so.longestPalindromeSubseq('bbbab')

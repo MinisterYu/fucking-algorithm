@@ -50,6 +50,8 @@ class Solution:
         print(s)
 
 
+
+
 if __name__ == '__main__':
     so = Solution()
-    s = so.calculate("(( (1*3) - 2 ) * ( 2+ 2)) /2 ")
+    s = so.calculate("3 + 5 / 2 * (7 - 4)")

@@ -8,6 +8,7 @@ from typing import List
 from itertools import accumulate
 from collections import defaultdict
 
+
 class Solution:
 
     # URL https://leetcode.cn/problems/binary-subarrays-with-sum/
@@ -42,7 +43,18 @@ class Solution:
                     return True
         return False
 
+    def subarraySum(self, nums: List[int]):
+        n = len(nums)
+        prefix_sum = [0] * (n + 1)
+        prefix_sum[0] = 0
+
+        for i in range(1, n + 1):
+            prefix_sum[i] = prefix_sum[i - 1] + nums[i - 1]
+
+        print(prefix_sum)
+
 
 if __name__ == '__main__':
     so = Solution()
-    so.numSubarraysWithSum([1, 0, 1, 0, 1], 2)
+    # so.numSubarraysWithSum([1, 0, 1, 0, 1], 2)
+    so.subarraySum([1, 2, 3])

@@ -203,22 +203,21 @@ class Solution:
             print(i)
 
     def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
-        books.sort(key=lambda x: (x[0], -x[1]))  # 按宽度、高度从小到大排序
-        print(books.sort())
-        dp = [0] * len(books)  # dp[i] 表示放入第i本书的总宽度
-        dp[0] = books[0][0]
-        height = [books[0][1]]
+        n = len(books)
+        dp = [0] + [float('inf')] * n
 
-        for i in range(1, len(books)):
-            if books[i][0] + dp[i - 1] <= shelfWidth:
-                height[-1] = max(height[-1], books[i][1])
-                dp[i] = books[i][0] + dp[i - 1]
+        for i in range(1, n + 1):
+            total_width = 0
+            max_height = 0
+            for j in range(i, 0, -1):
+                total_width += books[j - 1][0]
+                if total_width > shelfWidth:
+                    break
+                max_height = max(max_height, books[j - 1][1])
+                dp[i] = min(dp[i], dp[j - 1] + max_height)
 
-            if books[i][0] + dp[i - 1] > shelfWidth:  # 如果这一本
-                height.append(books[i][1])
-                dp[i] = books[i][0]
-        print(height)
-        return sum(height)
+        print(dp[-1])
+
 
 
 if __name__ == '__main__':

@@ -41,3 +41,35 @@ class Solution:
                     return True
 
         return False
+
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        nums.sort(key=lambda x: -x)  # 分组求和时，逆序排序可以加速算法速度
+
+        total_sum = sum(nums)
+        if total_sum % k != 0:
+            return False
+
+        target_sum = total_sum // k
+        subset_sums = [0] * k
+
+        def backtrack(index):
+            if index == len(nums):
+                return all(subset_sum == target_sum for subset_sum in subset_sums)
+
+            for i in range(k):
+                if i > 0 and subset_sums[i - 1] == subset_sums[i]:
+                    continue
+                if subset_sums[i] + nums[index] <= target_sum:
+                    subset_sums[i] += nums[index]
+                    if backtrack(index + 1):
+                        return True
+                    subset_sums[i] -= nums[index]
+
+            return False
+
+        return backtrack(0)
+
+
+if __name__ == '__main__':
+    so = Solution()
+    so.canPartitionKSubsets([4, 3, 2, 3, 5, 2, 1], 4)
