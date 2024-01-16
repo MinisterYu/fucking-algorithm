@@ -18,6 +18,7 @@ class Solution:
                 c = s.popleft()
                 if c.isdigit():
                     num = 10 * num + int(c)
+                    continue
                 # 遇到左括号开始递归计算 num
                 if c == '(':
                     num = helper(s)
@@ -43,4 +44,4 @@ class Solution:
 
 if __name__ == '__main__':
     so = Solution()
-    so.calculate("(1+(4+5+2)-3)+(6+8)")
+    so.calculate("1 + 1")

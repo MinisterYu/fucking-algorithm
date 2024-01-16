@@ -162,5 +162,4 @@ class Solution:
                 if grid[i][j] == 1:
                     # 淹没岛屿，并更新最大岛屿面积
                     res = max(res, dfs(i, j))
-
         return res

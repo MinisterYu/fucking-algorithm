@@ -9,6 +9,7 @@ from 练习题.二叉树 import TreeNode, printTree, arrayToTree
 from 练习题.链表 import ListNode
 from typing import Optional, List
 from collections import deque
+import math
 
 
 class Solution:
@@ -58,9 +59,70 @@ class Solution:
                 self.ans = root
 
             return max(left_depth, right_depth)
+
         traverse(root, 0)
         return self.ans
 
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        queue = collections.deque([s])
+        visited = set()
+        while queue:
+            rest = queue.popleft()
+            if not rest:
+                return True
+
+            for word in wordDict:
+                if rest.startswith(word):
+                    # visited.add(word)
+                    queue.append(rest[len(word):])
+        print(visited)
+        return False
+
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        target = sum(stones) // 2
+        dp = [0] * (target + 1)
+        for i in range(len(stones)):
+            for j in range(target, stones[i] - 1, -1):
+                dp[j] = max(dp[j], dp[j - stones[i]] + stones[i])
+
+        return sum(stones) - 2 * dp[-1]
+
+    def nthUglyNumber(self, n: int) -> int:
+        p2, p3, p5 = 1, 1, 1
+        v2, v3, v5 = 1, 1, 1
+        ugly = [0] * (n + 1)
+        p = 1
+        while p <= n:
+            min_v = min(v2, v3, v5)
+            ugly[p] = min_v
+            p += 1
+            if min_v == v2:
+                v2 = 2 * ugly[p2]
+                p2 += 1
+            if min_v == v3:
+                v3 = 3 * ugly[p3]
+                p3 += 1
+            if min_v == v5:
+                v5 = 5 * ugly[p5]
+                p5 += 1
+        print(ugly)
+
+    def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
+        n = len(books)
+        dp = [math.inf] * (n + 1)
+        dp[0] = 0
+        for i in range(1, n + 1):
+            height, width = 0, shelfWidth
+            for j in range(i, -1, -1):
+                width -= books[j][0]
+                if width < 0:
+                    break
+                height = max(height, books[j][1])
+                dp[i + 1] = min(dp[i + 1], dp[j] + height)
+        return dp[-1]
+
 
 if __name__ == '__main__':
-    pass
+    so = Solution()
+    # print(so.wordBreak("applepenapple", ["apple","pen"]))
+    so.nthUglyNumber(10)

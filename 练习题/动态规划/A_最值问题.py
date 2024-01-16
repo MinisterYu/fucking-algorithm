@@ -218,6 +218,18 @@ class Solution:
 
         print(dp[-1])
 
+    def minExtraChar(self, s: str, dictionary: List[str]) -> int:
+        # https://leetcode.cn/problems/extra-characters-in-a-string/
+        word_set = set(dictionary)
+        n = len(s)
+        dp = [0] + [float("inf")] * n  # dp[i] 表示字符串 s 的前 i 个字符最少剩余的字符数。
+        for i in range(1, n + 1):
+            dp[i] = dp[i - 1] + 1  # 假设当前字符不在任何单词中
+            for j in range(i):
+                if s[j:i] in word_set:
+                    dp[i] = min(dp[i], dp[j])  # 如果找到一个单词，更新最小剩余字符数
+        return dp[n]
+
 
 
 if __name__ == '__main__':

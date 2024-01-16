@@ -73,3 +73,19 @@ class Solution:
 if __name__ == '__main__':
     so = Solution()
     so.canPartitionKSubsets([4, 3, 2, 3, 5, 2, 1], 4)
+    s = [
+        {
+            "source": "这是一个巡检测试",
+            "score": 1,
+            "trans_list": [
+                {
+                    "text": "this is demo xunjian case",
+                    "repo_name": "例句库_双向_中英",
+                    "score": 1.0
+                }
+            ]
+        }
+    ]
+    board = [[1, 2, 3], [4, 5, 6], [1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    s = sum(board, [])
+    print(s )

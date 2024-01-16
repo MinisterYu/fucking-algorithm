@@ -117,6 +117,25 @@ class Solution(object):
                 left = mid + 1
         return nums[left]
 
+    # 寻找第K小的元素
+    def findKthSmallest(self, nums, k):
+        left, right = nums[0], nums[-1]
+
+        while left < right:
+            mid = left + (right - left) // 2
+            count = 0
+
+            for num in nums:
+                if num <= mid:
+                    count += 1
+
+            if count < k:
+                left = mid + 1
+            else:
+                right = mid
+
+        return left
+
     # todo  33. 搜索旋转排序数组
     def search(self, nums, target):
         left = 0
@@ -138,3 +157,6 @@ class Solution(object):
                 else:
                     right = mid
         return -1
+
+s1 = set()
+s1.intersection()

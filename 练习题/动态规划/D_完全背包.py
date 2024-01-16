@@ -60,4 +60,5 @@ class Solution:
 
 
 if __name__ == '__main__':
-    pass
+    import math
+    print(math.sqrt(2))

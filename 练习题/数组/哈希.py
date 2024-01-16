@@ -16,19 +16,24 @@ def findMissingNumber(nums):
     通过这种原地哈希的方式，我们可以在不使用额外空间的情况下找出缺失的数字。
     '''
     n = len(nums)
+    for i in range(n):
+        if nums[i] == 0:
+            nums[i] = n + 1
 
     # 标记出现过的数字
     for i in range(n):
         index = abs(nums[i])
-        nums[index] = -abs(nums[index])
+        if index <= n:
+            nums[index - 1] = -abs(nums[index - 1])
 
     # 找到未被标记的数字
     for i in range(n):
         if nums[i] > 0:
-            return i
+            return i + 1
 
     # 如果没有未被标记的数字，则缺失的是 n
-    return n
+    return n + 1
+
 
 def findMissingPositive(nums):
     # 找出未排序的整数数组中没有出现的最小的正整数，可以使用原地哈希的方法。
@@ -49,9 +54,9 @@ def findMissingPositive(nums):
 
     # 标记出现过的正整数
     for i in range(n):
-        num = abs(nums[i])
-        if num <= n:
-            nums[num - 1] = -abs(nums[num - 1])
+        index = abs(nums[i])
+        if index <= n:
+            nums[index - 1] = -abs(nums[index - 1])
 
     # 找到第一个未被标记的正整数
     for i in range(n):
@@ -60,3 +65,10 @@ def findMissingPositive(nums):
 
     # 如果都被标记了，则返回 n+1
     return n + 1
+
+
+rs1 = findMissingPositive([0, 1, 2])
+print(rs1)
+
+rs = findMissingNumber([0, 1, 3, 4, ])
+print(rs)
