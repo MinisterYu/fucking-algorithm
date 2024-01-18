@@ -93,9 +93,10 @@ def upright_traverse(nums2):
         print(i)
 
 
+
 #
-# print('二维数组竖过来')
-# upright_traverse(nums2)
+print('二维数组竖过来')
+upright_traverse(nums2)
 
 
 def clockwise_traverse(nums2):

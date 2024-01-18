@@ -3,6 +3,7 @@
 # @Time    : 2024/1/11 11:17
 # @Author  : MinisterYU
 # @File    : 哈希.py
+from typing import List
 
 
 def findMissingNumber(nums):
@@ -67,8 +68,37 @@ def findMissingPositive(nums):
     return n + 1
 
 
-rs1 = findMissingPositive([0, 1, 2])
-print(rs1)
+def maxOperations(nums: List[int], k: int) -> int:
+    # https://leetcode.cn/problems/max-number-of-k-sum-pairs/?envType=study-plan-v2&envId=leetcode-75
+    # TODO 给你一个整数数组 nums 和一个整数 k 。每一步操作中，你需要从数组中选出和为 k 的两个整数，并将它们移出数组。
+    bucket = {}
+    time = 0
+    for num in nums:
+        if bucket.get(k - num, 0):
+            bucket[k - num] -= 1
+            time += 1
+        else:
+            bucket[num] = bucket.get(num, 0) + 1
+    return time
 
-rs = findMissingNumber([0, 1, 3, 4, ])
-print(rs)
+
+def equalPairs(grid: List[List[int]]) -> int:
+    n = len(grid)
+    counter_map = {}
+    res = 0
+    # 行遍历
+    for i in range(n):
+        r_key = ''
+        for j in range(n):
+            r_key += str(grid[i][j])
+        counter_map[r_key] = counter_map.get(r_key, 0 ) + 1
+
+    for i in range(n):
+        c_key = ''
+        for j in range(n):
+            c_key += str(grid[j][i])
+        if c_key in counter_map:
+            res += counter_map[c_key]
+    return res
+
+equalPairs([[1, 2, 3], [4, 5, 6], [7, 8, 9]])

@@ -172,7 +172,7 @@ class Solution:
 
     def findAnagrams(self, s: str, p: str) -> List[int]:
         # https://leetcode.cn/problems/find-all-anagrams-in-a-string/
-        from collections import  defaultdict
+        from collections import defaultdict
         res = []
         need = n = len(p)
         counter = defaultdict(int)
@@ -197,6 +197,66 @@ class Solution:
                 res.append(right - n + 1)
         return res
 
+    def longestOnes(self, nums: List[int], k: int) -> int:
+        # https://leetcode.cn/problems/max-consecutive-ones-iii/?envType=study-plan-v2&envId=leetcode-75
+        # 1004. 最大连续1的个数 , 允许有K个0
+        res = 0
+        left = 0
+        need = 0
+
+        for right, num in enumerate(nums):
+            if num == 0:
+                need += 1
+
+            while need > k:
+                if nums[left] == 0:
+                    need -= 1
+                left += 1
+
+            res = max(res, right - left + 1)
+        return res
+
+    def longestSubarray(self, nums: List[int]) -> int:
+        # https://leetcode.cn/problems/longest-subarray-of-1s-after-deleting-one-element/?envType=study-plan-v2&envId=leetcode-75
+        # 1493. 删掉一个元素以后全为 1 的最长子数组
+        left = 0
+        max_length = 0
+        need = 0
+        for right, num in enumerate(nums):
+            if num == 0:
+                need += 1
+
+            while need > 1:
+                if nums[left] == 0:
+                    need -= 1
+                left += 1
+
+            max_length = max(max_length, right - left)
+
+        return max_length
+
+    def maxVowels(self, s: str, k: int) -> int:
+        # https://leetcode.cn/problems/maximum-number-of-vowels-in-a-substring-of-given-length/?envType=study-plan-v2&envId=leetcode-75
+        # 1456. 定长子串中元音的最大数目
+        candidates = ['a', 'e', 'i', 'o', 'u']
+        max_count = 0
+        cur_count = 0
+        cur_len = 0
+        left = 0
+        for right in range(len(s)):
+            cur_len += 1
+            if s[right] in candidates:
+                cur_count += 1
+
+            while cur_len > k:
+                if s[left] in candidates:
+                    cur_count -= 1
+                cur_len -= 1
+                left += 1
+
+            if cur_len == k:
+                max_count = max(max_count, cur_count)
+        return max_count
 
 
 if __name__ == '__main__':

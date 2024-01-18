@@ -359,6 +359,29 @@ class Solution:
 
         return dfs(root, "")
 
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        res = level = 1
+        max_count = root.val
+        stack = [root]
+        while stack:
+            n = len(stack)
+            cur_count = 0
+            for _ in range(n):
+                node = stack.pop()
+                cur_count += node.val
+                if node.left:
+                    stack.append(node.left)
+                if node.right:
+                    stack.append(node.right)
+            if max_count < cur_count:
+                max_count = cur_count
+                res = level
+                print(max_count, res)
+            level += 1
+
+        print(res)
+
+
 if __name__ == '__main__':
     so = Solution()
     # tree = arrayToTree([3, 9, 20, None, None, 15, 7])
@@ -396,4 +419,5 @@ if __name__ == '__main__':
     # root = so.sortedArrayToBST([1, 2, 3, 4, 5, 6, 7])
     # root = arrayToTree([4, 2, 1, 3, 6, 5, 7])
     # printTree(root)
-    so.smallestFromLeaf(arrayToTree([0, 1, 2, 3, 4, 3, 4]))
+    # so.smallestFromLeaf(arrayToTree([0, 1, 2, 3, 4, 3, 4]))
+    so.maxLevelSum(arrayToTree([989, None, 10250, 98693, -89388, None, None, None, -32127]))

@@ -24,18 +24,37 @@ class Solution:
 
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         # https://leetcode.cn/problems/product-of-array-except-self/
+        # 除自身以外的乘积
+        prefix = [1] * len(nums)
+        for i in range(1, len(nums)):
+            prefix[i] = prefix[i - 1] * nums[i - 1]
+
+        post = [1] * len(nums)
+        for i in range(len(nums) - 2, -1, -1):
+            post[i] = post[i + 1] * nums[i + 1]
+
+        res = []
+        for i in range(len(nums)):
+            res.append(prefix[i] * post[i])
+        return res
+
+    def pivotIndex(self, nums: List[int]) -> int:
+        # https://leetcode.cn/problems/find-pivot-index/?envType=study-plan-v2&envId=leetcode-75
+        # 724. 寻找数组的中心下标
         n = len(nums)
-        left = [1] * n
-        right = [1] * n
+        prefix = [0] * n
 
         for i in range(1, n):
-            left[i] = left[i - 1] * nums[i - 1]
+            prefix[i] = prefix[i - 1] + nums[i - 1]
 
+        post = [0] * n
         for i in range(n - 2, -1, -1):
-            right[i] = right[i + 1] * nums[i + 1]
+            post[i] = post[i + 1] + nums[i + 1]
 
-        ans = [left[i] * right[i] for i in range(n)]
-        return ans
+        for i in range(n):
+            if prefix[i] == post[i]:
+                return i
+        return -1
 
     def checkSubarraySum(self, nums: List[int], k: int) -> bool:
         # https://leetcode.cn/problems/continuous-subarray-sum/description/
@@ -159,6 +178,22 @@ class Solution:
         所以, 当前nums[i]与左右其他数的绝对值之和为:
         sumOfDifferences = sumOfLeftDifferences+sumOfRightDifferences;
         '''
+        pass
+    def largestAltitude(self, gain: List[int]) -> int:
+        # https://leetcode.cn/problems/find-the-highest-altitude/?envType=study-plan-v2&envId=leetcode-75
+        # 1732. 找到最高海拔
+        # res = total = 0
+        # for i in gain:
+        #     total += i
+        #     res = max(res, total)
+        # return res
+
+        res = [0] * (len(gain) + 1)
+        for i in range(1, len(gain) + 1):
+            res[i] = res[i - 1] + gain[i - 1]
+        return max(res)
+
+
 
 
 if __name__ == '__main__':
@@ -170,7 +205,8 @@ if __name__ == '__main__':
 
     nums1 = [1, 2, 3, 4, 5]
     nums2 = [3, 4, 5, 6, 7]
-    print(set(nums1) | set(nums2))
-    print(set(nums1) & set(nums2))
-    print(set(nums1) ^ set(nums2))
-    print("   blue is sky the    ".split())
+    # print(set(nums1) | set(nums2))
+    # print(set(nums1) & set(nums2))
+    # print(set(nums1) ^ set(nums2))
+    # print("   blue is sky the    ".split())
+
