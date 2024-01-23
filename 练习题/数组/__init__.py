@@ -60,7 +60,7 @@ def quick_sort(nums):
     if len(nums) <= 1:
         return nums
 
-    pivot = nums[ len(nums) // 2 ]
+    pivot = nums[len(nums) // 2]
     left = [x for x in nums if x < pivot]
     right = [x for x in nums if x > pivot]
     middle = [x for x in nums if x == pivot]
@@ -107,6 +107,8 @@ def sqaure_sort(nums):
 nums = [100, 4, 200, 1, 3, 2]
 print(bubble_sort(nums))
 print(bubble_sort2(nums))
+
+
 # print(merge_sort(nums))
 # print(quick_sort(nums))
 # print(selection_sort(nums))
@@ -162,6 +164,5 @@ def yh_trigle(numRows):
         triangle.append(row)
 
     return triangle
-
 
 

@@ -60,3 +60,25 @@ class Solution:
                 count -= nums[left]
                 left += 1
         return ans if ans < len(nums) + 1 else 0
+
+    def removeDuplicates(self, nums: List[int], k=2) -> int:
+        # 删除有序数组中的重复项， 只保留至多 k 个相同数字
+        # https://leetcode.cn/problems/remove-duplicates-from-sorted-array-ii/?envType=study-plan-v2&envId=top-interview-150
+        n = len(nums)
+        if n <= k:
+            return n
+
+        slow = fast = k
+        while fast < n:
+            if nums[slow - k] != nums[fast]:
+                nums[slow] = nums[fast]
+                slow += 1
+            fast += 1
+
+        print(nums[:slow])
+        return slow
+
+
+if __name__ == '__main__':
+    so = Solution()
+    so.removeDuplicates([1,2,3], k=1)

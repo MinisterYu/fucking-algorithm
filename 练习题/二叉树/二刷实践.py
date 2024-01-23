@@ -121,8 +121,32 @@ class Solution:
                 dp[i + 1] = min(dp[i + 1], dp[j] + height)
         return dp[-1]
 
+    def isCompleteTree(self, root: TreeNode) -> bool:
+        # 判断是否是完全二叉树
+        # https://www.nowcoder.com/practice/8daa4dff9e36409abba2adbe413d6fae?tpId=295&tags=&title=&difficulty=0&judgeStatus=0&rp=0&sourceUrl=%2Fexam%2Foj
+        if not root:
+            return True
+
+        queue = deque()
+        queue.append(root)
+
+        while queue:
+            node = queue.popleft()
+
+            if node:
+                queue.append(node.left)
+                queue.append(node.right)
+            else: # 如果加入的是空节点
+                # 有未访问到的非空节点，则树存在空洞，为非完全二叉树
+                while queue: # 如果空节点后面还有非空节点，则为非完全二叉树
+                    if queue.popleft():
+                        return False
+
+        return True
 
 if __name__ == '__main__':
     so = Solution()
     # print(so.wordBreak("applepenapple", ["apple","pen"]))
     so.nthUglyNumber(10)
+    import heapq
+    heapq.nlargest()

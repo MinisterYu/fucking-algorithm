@@ -15,6 +15,7 @@ def firstMissingPositive(nums):
     print(nums)
     # 根据数组中的正整数将对应位置的数置为负数
     # 再次遍历数组 nums，对于每个正整数 num，我们将数组中索引为 num - 1 的位置的数置为负数。这样，我们可以通过正负号来标记某个正整数是否出现过。
+
     for i in range(n):
         num = abs(nums[i])
         if num <= n:
@@ -35,10 +36,3 @@ def firstMissingPositive(nums):
 nums = [3, 4, -1, 1]
 result = firstMissingPositive(nums)
 print(result)  # 输出 2
-
-from collections import  defaultdict
-
-d = defaultdict(list)
-a = 'bdac'
-
-print(a)

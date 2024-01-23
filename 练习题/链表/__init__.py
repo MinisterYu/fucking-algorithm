@@ -45,12 +45,11 @@ def mid(node):
     while fast1 and fast1.next:
         fast1 = fast1.next.next
         slow1 = slow1.next
-    print('fast1 and fast1.next')
-    print(slow1.val)
+    print(f'fast1 and fast1.next -> {slow1.val}')
 
 
-# mid(node1)
-# mid(node2)
+mid(node1)
+mid(node2)
 
 
 def mid2(node):
@@ -60,8 +59,32 @@ def mid2(node):
     while fast1.next and fast1.next.next:
         fast1 = fast1.next.next
         slow1 = slow1.next
-    print('fast1.next and fast1.next.next')
-    print(slow1.val)
+    print(f'fast1.next and fast1.next.next ->  {slow1.val}')
 
-# mid2(node1)
-# mid2(node2)
+mid2(node1)
+mid2(node2)
+
+
+def isPail(self, head: ListNode) -> bool:
+    # write code here
+    if not head or not head.next:
+        return True
+    pre_nodes = []
+    fast, slow = head, head
+    while fast.next and fast.next.next:
+        pre_nodes.append(slow.val)
+        fast = fast.next.next
+        slow = slow.next
+    post_nodes = []
+    while slow:
+        post_nodes.insert(0, slow.val)
+        slow = slow.next
+    for i in range(len(post_nodes)):
+        if post_nodes[i] != pre_nodes[i]:
+            return False
+    return True
+
+
+
+
+

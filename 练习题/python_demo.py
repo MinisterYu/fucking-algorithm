@@ -109,5 +109,37 @@ removeDuplicates('abbaca')
 #     print(s[i - 1], s[i])
 
 from itertools import pairwise
+
 a = pairwise('000111000111')
 print(list(a))
+
+
+def threeSum(num: List[int]) -> List[List[int]]:
+    # write code here
+    num.sort()
+    res = []
+    for i in range(len(num) - 2):
+        # if i > 0 and num[i - 1] == num[i]:
+        #     continue
+
+        x = num[i]
+        j = i + 1
+        k = len(num) - 1
+        while j < k:
+            if x + num[j] + num[k] < 0:
+                j += 1
+            elif x + num[j] + num[k] > 0:
+                k -= 1
+            elif x + num[j] + num[k] == 0:
+                res.append([x, num[j], num[k]])
+                j += 1
+                # while j < k and num[j - 1] == num[j]:
+                #     j += 1
+
+                k -= 1
+                # while j < k and num[k + 1] == num[k]:
+                #     k -= 1
+    print(res)
+
+
+threeSum([0, 0, 0])

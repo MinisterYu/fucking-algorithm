@@ -9,7 +9,7 @@ class Solution:
         m, n = len(s1), len(s2)
         # 创建一个二维数组 dp，dp[i][j] 表示 str1 的前 i 个字符和 str2 的前 j 个字符的最长公共子序列的长度
         dp = [[0] * (n + 1) for _ in range(m + 1)]
-
+        res = ""
         for i in range(1, m + 1):
             for j in range(1, n + 1):
                 if s1[i - 1] == s2[j - 1]:
@@ -18,7 +18,8 @@ class Solution:
                 else:
                     # 如果当前字符不相等，则最长公共子序列的长度为前一个状态中的最大值
                     dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
-
+        for i in dp:
+            print(i)
         # dp[m][n] 为找到最长公共子序列的路径
         # 从 dp[m][n] 开始回溯，构造最长公共子序列
         i, j = m, n
@@ -158,3 +159,7 @@ class Solution:
                     dp[i][j] = max(dp[i][j - 1], dp[i + 1][j])
 
         return dp[0][n - 1]  # 取右上角的那个，因为是从左往右，从下往上在遍历
+
+if __name__ == '__main__':
+    so = Solution()
+    so.LCS("1A2C3D4B56","B1D23A456A")

@@ -230,6 +230,21 @@ class Solution:
                     dp[i] = min(dp[i], dp[j])  # 如果找到一个单词，更新最小剩余字符数
         return dp[n]
 
+    def numDecodings(self, s):
+        # 有一种将字母编码成数字的方式：'a'->1, 'b->2', ... , 'z->26'。
+        # 现在给一串数字，返回有多少种可能的译码结果
+        n = len(s)
+        dp = [0] * (n + 1)
+        dp[0] = 1
+        dp[1] = 1 if s[0] != '0' else 0
+
+        for i in range(2, n + 1):
+            if s[i - 1] != '0':
+                dp[i] += dp[i - 1]
+            if '10' <= s[i - 2:i] <= '26':
+                dp[i] += dp[i - 2]
+
+        return dp[n]
 
 
 if __name__ == '__main__':

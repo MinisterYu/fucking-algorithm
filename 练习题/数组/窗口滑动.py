@@ -263,3 +263,6 @@ if __name__ == '__main__':
     so = Solution()
     # so.numSubarraysWithSum([0, 1, 0, 0], 0)
     so.findAnagrams("cbaebabacd", 'abc')
+    import itertools
+    s = itertools.accumulate([1,2,3,4])
+    print(list(s))
