@@ -381,6 +381,70 @@ class Solution:
 
         print(res)
 
+    def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
+        def traverse(start, end):
+            if start > end:
+                return [None]
+            res = []
+            for i in range(start, end):
+                left_nodes = traverse(start, i - 1)
+                right_nodes = traverse(i + 1, end)
+
+                for left in left_nodes:
+                    for right in right_nodes:
+                        root = TreeNode(val=i, left=left, right=right)
+                        res.append(root)
+            return res
+
+        return traverse(1, n + 1)
+
+    def findSecondMinimumValue(self, root: Optional[TreeNode]) -> int:
+        self.res = -1
+
+        def traverse(root, cur):
+            if not root:
+                return
+            if root.val != cur:
+                if self.res == -1:
+                    self.res = root.val
+                else:
+                    self.res = min(root.val, self.ans)
+                    return
+            traverse(root.left, cur)
+            traverse(root.right, cur)
+
+        traverse(root, root.val)
+        return self.res
+
+    def maxSumAfterPartitioning(self, arr: List[int], k: int) -> int:
+        n = len(arr)
+        res = [0] * n
+        for i in range(k):
+            res[i] = max(arr[:k])
+
+        for i in range(k, n - k):
+            res[i] = max(arr[i: i + k])
+
+        for i in range(n - k, n):
+            res[i] = max(arr[n - k: n])
+
+        print(res)
+
+    def isPalindrome(self, s: str) -> bool:
+        left = 0
+        right = len(s) - 1
+        while left < right:
+            if not s[left].isalnum():
+                left += 1
+            if not s[right].isalnum():
+                right -= 1
+            if s[left].lower() != s[right].lower():
+                return False
+            left += 1
+            right -= 1
+        return True
+
+
 
 if __name__ == '__main__':
     so = Solution()
@@ -420,4 +484,11 @@ if __name__ == '__main__':
     # root = arrayToTree([4, 2, 1, 3, 6, 5, 7])
     # printTree(root)
     # so.smallestFromLeaf(arrayToTree([0, 1, 2, 3, 4, 3, 4]))
-    so.maxLevelSum(arrayToTree([989, None, 10250, 98693, -89388, None, None, None, -32127]))
+    # so.maxLevelSum(arrayToTree([989, None, 10250, 98693, -89388, None, None, None, -32127]))
+    # s = so.isPalindrome("A man, a plan, a canal: Panama")
+    # print(s)
+    # so.findWords(board=[["o","a","a","n"],["e","t","a","e"],["i","h","k","r"],["i","f","l","v"]],
+    #              words=["oath","pea","oaane","rain"])
+    s1 = {'a', 'b'}
+    s2 = {'b', 'c'}
+    print(s1 & s2)

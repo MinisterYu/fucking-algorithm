@@ -3,6 +3,7 @@
 # @Time    : 2024/1/11 11:17
 # @Author  : MinisterYU
 # @File    : 哈希.py
+import heapq
 from typing import List
 
 
@@ -91,7 +92,7 @@ def equalPairs(grid: List[List[int]]) -> int:
         r_key = ''
         for j in range(n):
             r_key += str(grid[i][j])
-        counter_map[r_key] = counter_map.get(r_key, 0 ) + 1
+        counter_map[r_key] = counter_map.get(r_key, 0) + 1
 
     for i in range(n):
         c_key = ''
@@ -101,4 +102,62 @@ def equalPairs(grid: List[List[int]]) -> int:
             res += counter_map[c_key]
     return res
 
+
 equalPairs([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+
+def findMinDifference(timePoints: List[str]) -> int:
+    minutes = []
+    for time in timePoints:
+        hour, minute = map(int, time.split(':'))
+        total_minutes = hour * 60 + minute
+        minutes.append(total_minutes)
+
+    minutes.sort()
+
+    min_diff = float('inf')
+    for i in range(1, len(minutes)):
+        diff = minutes[i] - minutes[i - 1]
+        min_diff = min(min_diff, diff)
+
+    # 考虑首尾时间的差值
+    diff = minutes[0] + (24 * 60 - minutes[-1])
+    min_diff = min(min_diff, diff)
+
+    return min_diff
+
+
+def containsNearbyAlmostDuplicate(nums: List[int], k: int, t: int) -> bool:
+    # abs(nums[i] - nums[j]) <= t
+    # abs(i - j) <= k
+    if not nums:
+        return False
+    if k == 0:
+        return True
+
+    def lower_bound(target, lists):
+        left = 0
+        right = len(lists)
+        while left < right:
+            mid = (right - left) // 2 + left
+            if lists[mid] < target:
+                left = mid + 1
+            else:
+                right = mid
+
+        return left
+
+    heap = []
+    for i in range(len(nums)):
+        lower = lower_bound(nums[i] - t, heap)
+        if lower != len(heap) and heap[lower] <= nums[i] + t:
+            return True
+
+        if nums[i] not in heap:
+            heapq.heappush(heap, nums[i])
+
+        if i >= k:
+            heap.remove(nums[i - k])
+
+    return False
+

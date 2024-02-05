@@ -18,7 +18,20 @@ class Solution:
 
         return ''.join(stack)
 
-if __name__ == '__main__':
-    so = Solution()
-    s = so.removeStars("erase*****")
-    print(s)
+    def longestValidParentheses(self, s: str) -> int:
+        # 计算字符串中的最长有效括号长度
+        stack = []
+        stack.append(-1)
+        max_length = 0
+
+        for i in range(len(s)):
+            if s[i] == "(":
+                stack.append(i)
+            else:
+                stack.pop()
+                if len(stack) == 0:
+                    stack.append(i)
+                else:
+                    max_length = max(max_length, i - stack[-1])
+
+        return max_length
