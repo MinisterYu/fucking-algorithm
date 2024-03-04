@@ -59,6 +59,8 @@ class Solution:
         return dp[-1]
 
 
+
+
 if __name__ == '__main__':
     import math
     print(math.sqrt(2))

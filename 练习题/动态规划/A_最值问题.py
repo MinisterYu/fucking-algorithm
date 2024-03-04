@@ -9,6 +9,24 @@ from typing import List
 
 class Solution:
 
+    def minFlipsMonoIncr(self, s: str) -> int:
+        # https://leetcode.cn/problems/cyJERH/?envType=study-plan-v2&envId=coding-interviews-special
+        # 翻转最少次数使二进制字符串变成递增
+        n = len(s)
+        dp_zero = [0] * (n + 1)
+        dp_one = [0] * (n + 1)
+
+        for i in range(1, n + 1):
+            if s[i - 1] == "0":
+                dp_zero[i] = dp_zero[i - 1]
+                dp_one[i] = dp_one[i - 1] + 1
+            else:
+                dp_zero[i] = dp_zero[i - 1] + 1
+                dp_one[i] = min(dp_zero[i - 1], dp_one[i - 1])
+
+        return min(dp_zero[-1], dp_one[-1])
+
+
     def countSubstrings(self, s: str) -> int:
         # https://leetcode.cn/problems/palindromic-substrings/
         n = len(s)

@@ -10,7 +10,7 @@ from 练习题.链表 import ListNode
 from typing import Optional, List
 from collections import deque
 import math
-
+import heapq
 
 class Solution:
 
@@ -88,25 +88,37 @@ class Solution:
         return sum(stones) - 2 * dp[-1]
 
     def nthUglyNumber(self, n: int) -> int:
-        p2, p3, p5 = 1, 1, 1
-        v2, v3, v5 = 1, 1, 1
-        ugly = [0] * (n + 1)
-        p = 1
-        while p <= n:
-            min_v = min(v2, v3, v5)
-            ugly[p] = min_v
-            p += 1
-            if min_v == v2:
-                v2 = 2 * ugly[p2]
-                p2 += 1
-            if min_v == v3:
-                v3 = 3 * ugly[p3]
-                p3 += 1
-            if min_v == v5:
-                v5 = 5 * ugly[p5]
-                p5 += 1
-        print(ugly)
+        # p2, p3, p5 = 1, 1, 1
+        # v2, v3, v5 = 1, 1, 1
+        # ugly = [0] * (n + 1)
+        # p = 1
+        # while p <= n:
+        #     min_v = min(v2, v3, v5)
+        #     ugly[p] = min_v
+        #     p += 1
+        #     if min_v == v2:
+        #         v2 = 2 * ugly[p2]
+        #         p2 += 1
+        #     if min_v == v3:
+        #         v3 = 3 * ugly[p3]
+        #         p3 += 1
+        #     if min_v == v5:
+        #         v5 = 5 * ugly[p5]
+        #         p5 += 1
+        # print(ugly)
 
+        heap = [1]
+        index = 0
+        visited = set()
+        while index < n:
+            index += 1
+            val = heapq.heappop(heap)
+            for i in [2, 3, 5]:
+                if i * val not in visited:
+                    visited.add(i * val)
+                    heapq.heappush(heap, i * val)
+
+        return val
     def minHeightShelves(self, books: List[List[int]], shelfWidth: int) -> int:
         n = len(books)
         dp = [math.inf] * (n + 1)
@@ -148,5 +160,3 @@ if __name__ == '__main__':
     so = Solution()
     # print(so.wordBreak("applepenapple", ["apple","pen"]))
     so.nthUglyNumber(10)
-    import heapq
-    heapq.nlargest()

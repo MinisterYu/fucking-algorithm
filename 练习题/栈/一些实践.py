@@ -35,3 +35,28 @@ class Solution:
                     max_length = max(max_length, i - stack[-1])
 
         return max_length
+
+    def checkValidString(self, s: str) -> bool:
+        # 678. 有效的括号字符串
+        stack = []
+        s_stack = []
+
+        for char in s:
+            if char == '(':
+                stack.append(char)
+            elif char == '*':
+                stack.append(char)
+            else:
+                if stack:
+                    stack.pop()
+                elif s_stack:
+                    stack.pop()
+                else:
+                    return False
+        print(stack)
+        print(s_stack)
+        return True if len(stack) == 0 else False
+
+if __name__ == '__main__':
+    s = Solution()
+    s.checkValidString('(*)')
