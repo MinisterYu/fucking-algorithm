@@ -94,11 +94,10 @@ class Solution:
                 count += 1
             else:
                 count -= 1
-            if count not in prefix_sum:
-                prefix_sum[count] = i
+            if count in prefix_sum:
+                max_length = max(max_length, i - prefix_sum[count])
             else:
-                if count in prefix_sum and count == 0:
-                    max_length = max(max_length, i - prefix_sum[count])
+                prefix_sum[count] = i
         return max_length
 
     def subarraySum(self, nums: List[int], k: int) -> int:
@@ -179,6 +178,7 @@ class Solution:
         sumOfDifferences = sumOfLeftDifferences+sumOfRightDifferences;
         '''
         pass
+
     def largestAltitude(self, gain: List[int]) -> int:
         # https://leetcode.cn/problems/find-the-highest-altitude/?envType=study-plan-v2&envId=leetcode-75
         # 1732. 找到最高海拔
@@ -193,7 +193,30 @@ class Solution:
             res[i] = res[i - 1] + gain[i - 1]
         return max(res)
 
+    def shortestSeq(self, big: List[int], small: List[int]) -> List[int]:
+        n = need = len(small)
+        counter = Counter(small)
+        res = len(big) + 1
+        left = 0
+        res_list = [0, 0]
+        for right in range(len(big)):
+            number = big[right]
+            if number in counter:
+                if counter[number] > 0 :
+                    need -= 1
+                counter[number] -= 1
 
+            while need == 0:
+                if res > right - left + 1:
+                    res = min(res, right - left + 1)
+                    res_list = [left, right + 1]
+                number = big[left]
+                if number in counter:
+                    if counter[number] >= 0:
+                        need += 1
+                    counter[number] += 1
+                left += 1
+        return res_list
 
 
 if __name__ == '__main__':
@@ -203,10 +226,10 @@ if __name__ == '__main__':
     # print(max( i[2] for i in nums  ))
     # res = so.garbageCollection(garbage=["G", "M"], travel=[1])
 
-    nums1 = [1, 2, 3, 4, 5]
-    nums2 = [3, 4, 5, 6, 7]
+    # nums1 = [1, 2, 3, 4, 5]
+    # nums2 = [3, 4, 5, 6, 7]
     # print(set(nums1) | set(nums2))
     # print(set(nums1) & set(nums2))
     # print(set(nums1) ^ set(nums2))
     # print("   blue is sky the    ".split())
-
+    print(so.findMaxLength([0, 0, 0, 1, 1, 0, 0, 1, 1]))
