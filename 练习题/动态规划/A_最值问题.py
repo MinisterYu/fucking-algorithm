@@ -12,6 +12,9 @@ class Solution:
     def minFlipsMonoIncr(self, s: str) -> int:
         # https://leetcode.cn/problems/cyJERH/?envType=study-plan-v2&envId=coding-interviews-special
         # 翻转最少次数使二进制字符串变成递增
+        '''
+        其中 dp0[i] 表示将 s[i] 之前的字符全部翻转为 '0' 所需的最小翻转次数，dp1[i] 表示将 s[i] 之前的字符全部翻转为 '1' 所需的最小翻转次数。
+        '''
         n = len(s)
         dp_zero = [0] * (n + 1)
         dp_one = [0] * (n + 1)
@@ -60,6 +63,7 @@ class Solution:
         输出：4
         解释：最长有效括号子串是 "()()"
         '''
+        if not s: return 0
         # 栈解决
         stack = []
         max_len = 0
@@ -82,7 +86,7 @@ class Solution:
                 dp[i] = 0
             elif s[i] == ')':
                 if s[i - 1] == '(':  # ()( -> )
-                    dp[i] = s[i - 2] + 2 if i >= 2 else 2
+                    dp[i] = dp[i - 2] + 2 if i >= 2 else 2
 
                 elif (s[i - 1] == ')'  # (..()-> )
                       and i - dp[i - 1] > 0
