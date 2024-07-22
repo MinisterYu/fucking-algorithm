@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/pictures" />
+      <excludeFolder url="file://$MODULE_DIR$/动态规划系列" />
+      <excludeFolder url="file://$MODULE_DIR$/多语言解法代码" />
+      <excludeFolder url="file://$MODULE_DIR$/技术" />
+      <excludeFolder url="file://$MODULE_DIR$/数据结构系列" />
+      <excludeFolder url="file://$MODULE_DIR$/算法思维系列" />
+      <excludeFolder url="file://$MODULE_DIR$/高频面试系列" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 3.10" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

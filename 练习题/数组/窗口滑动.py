@@ -22,7 +22,7 @@ class Solution:
         n = len(s)
         start, end = 0, -1  # 记录目标子串s[start, end]的起始和结尾
         min_len = n + 1  # 符合题意的最短子串长度【初始化为一个不可能的较大值】
-        left = right = 0  # 滑动窗口的左右边界
+        left = 0  # 滑动窗口的左右边界
 
         for right in range(n):
 

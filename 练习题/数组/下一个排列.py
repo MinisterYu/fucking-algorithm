@@ -62,3 +62,39 @@ def nextPermutation(nums: List[int]) -> None:
         nums[left], nums[right] = nums[right], nums[left]
         left += 1
         right -= 1
+
+
+def nextPermutation2(nums):
+    # 找到第一个相邻的元素对 (i, i+1)，满足 nums[i] < nums[i+1]
+    '''
+    1、从右向左遍历数组，找到第一个相邻的元素对 (i, i+1)，满足 nums[i] < nums[i+1]。如果不存在这样的元素对，则说明数组已经是最大排列，将其反转为最小排列即可。
+
+    2、在找到的元素对 (i, i+1) 中，从右向左遍历，找到第一个元素 nums[j] 满足 nums[j] > nums[i]。
+
+    3、交换元素 nums[i] 和 nums[j]。
+
+    4、将下标 i+1 及其之后的元素进行反转，以得到下一个排列。'''
+
+    i = len(nums) - 2
+    # 找到第一个较小的数
+    while i >= 0 and nums[i] >= nums[i + 1]:
+        i -= 1
+
+    if i < 0:
+        nums.reverse()
+        return
+
+    j = len(nums) - 1
+    # 找到第一个较大数
+    while j > i and nums[i] >= nums[j]:
+        j -= 1
+
+    # 交换元素 nums[i] 和 nums[j]
+    nums[i], nums[j] = nums[j], nums[i]
+    # 反转下标 i+1 及其之后的元素
+    nums[i + 1:] = reversed(nums[i + 1:])
+
+
+nums = [1, 3, 2]
+nextPermutation2(nums)
+print(nums)

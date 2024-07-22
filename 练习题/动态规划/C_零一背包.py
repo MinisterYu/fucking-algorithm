@@ -15,6 +15,21 @@ class Solution:
             return True
         return False
 
+    def canPartition2(self, nums):
+        n = len(nums)
+        s = sum(nums)
+        if s % 2:
+            return False
+        target = s // 2
+        dp = [True] + [False] * target
+        for i in range(n):
+            for j in range(target, nums[i] - 1, -1):
+                # 如果 j 可以通过前 i-1 个数得到，那么 dp[i][j] = True。这表示我们可以选择不使用第 i 个数，直接继承前 i-1 个数的选择方案。
+                # 如果 j 可以通过前 i-1 个数得到，那么 dp[i][j+nums[i]] = True。这表示我们可以选择使用第 i 个数，并将其加到和为 j 的选择方案中。
+                dp[j] = dp[j] or dp[j - nums[i]]
+        print(dp)
+        return dp[-1]
+
     # TODO 1049 . 01背包(分割数组, 求最大值）
     def lastStoneWeightII(self, stones):
         caps = sum(stones) // 2
