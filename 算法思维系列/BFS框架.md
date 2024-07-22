@@ -2,14 +2,14 @@
 
 <p align='center'>
 <a href="https://github.com/labuladong/fucking-algorithm" target="view_window"><img alt="GitHub" src="https://img.shields.io/github/stars/labuladong/fucking-algorithm?label=Stars&style=flat-square&logo=GitHub"></a>
-<a href="https://appktavsiei5995.pc.xiaoe-tech.com/index" target="_blank"><img class="my_header_icon" src="https://img.shields.io/static/v1?label=精品课程&message=查看&color=pink&style=flat"></a>
+<a href="https://labuladong.online/algo/" target="_blank"><img class="my_header_icon" src="https://img.shields.io/static/v1?label=精品课程&message=查看&color=pink&style=flat"></a>
 <a href="https://www.zhihu.com/people/labuladong"><img src="https://img.shields.io/badge/%E7%9F%A5%E4%B9%8E-@labuladong-000000.svg?style=flat-square&logo=Zhihu"></a>
 <a href="https://space.bilibili.com/14089380"><img src="https://img.shields.io/badge/B站-@labuladong-000000.svg?style=flat-square&logo=Bilibili"></a>
 </p>
 
-![](https://labuladong.github.io/pictures/souyisou1.png)
+![](https://labuladong.online/algo/images/souyisou1.png)
 
-**通知：[数据结构精品课](https://aep.h5.xeknow.com/s/1XJHEO) 和 [递归算法专题课](https://aep.xet.tech/s/3YGcq3) 限时附赠网站会员，全新纸质书[《labuladong 的算法笔记》](https://labuladong.gitee.io/algo/images/book/book_intro_qrcode.jpg) 出版，签名版限时半价！另外，建议你在我的 [网站](https://labuladong.github.io/algo/) 学习文章，体验更好。**
+**通知：[新版网站会员](https://labuladong.online/algo/intro/site-vip/) 即将涨价；已支持老用户续费~另外，建议你在我的 [网站](https://labuladong.online/algo/) 学习文章，体验更好。**
 
 
 
@@ -29,7 +29,7 @@
 
 后台有很多人问起 BFS 和 DFS 的框架，今天就来说说吧。
 
-首先，你要说我没写过 BFS 框架，这话没错，今天写个框架你背住就完事儿了。但要是说没写过 DFS 框架，那你还真是说错了，**其实 DFS 算法就是回溯算法**，我们前文 [回溯算法框架套路详解](https://labuladong.github.io/article/fname.html?fname=回溯算法详解修订版) 就写过了，而且写得不是一般得好，建议好好复习，嘿嘿嘿~
+首先，你要说我没写过 BFS 框架，这话没错，今天写个框架你背住就完事儿了。但要是说没写过 DFS 框架，那你还真是说错了，**其实 DFS 算法就是回溯算法**，我们前文 [回溯算法框架套路详解](https://labuladong.online/algo/essential-technique/backtrack-framework/) 就写过了，而且写得不是一般得好，建议好好复习，嘿嘿嘿~
 
 BFS 的核心思想应该不难理解的，就是把一些问题抽象成图，从一个点开始，向四周开始扩散。一般来说，我们写 BFS 算法都是用「队列」这种数据结构，每次将一个节点周围的所有节点加入队列。
 
@@ -51,7 +51,7 @@ BFS 相对 DFS 的最主要的区别是：**BFS 找到的路径一定是最短�
 
 净整些花里胡哨的，本质上看这些问题都没啥区别，就是一幅「图」，让你从一个起点，走到终点，问最短路径。这就是 BFS 的本质，框架搞清楚了直接默写就好。
 
-![](https://labuladong.github.io/pictures/BFS/0.jpeg)
+![](https://labuladong.online/algo/images/BFS/0.jpeg)
 
 记住下面这个框架就 OK 了：
 
@@ -139,9 +139,9 @@ int minDepth(TreeNode root) {
 
 这里注意这个 `while` 循环和 `for` 循环的配合，**`while` 循环控制一层一层往下走，`for` 循环利用 `sz` 变量控制从左到右遍历每一层二叉树节点**：
 
-![](https://labuladong.github.io/pictures/dijkstra/1.jpeg)
+![](https://labuladong.online/algo/images/dijkstra/1.jpeg)
 
-这一点很重要，这个形式在普通 BFS 问题中都很常见，但是在 [Dijkstra 算法模板框架](https://labuladong.github.io/article/fname.html?fname=dijkstra算法) 中我们修改了这种代码模式，读完并理解本文后你可以去看看 BFS 算法是如何演变成 Dijkstra 算法在加权图中寻找最短路径的。
+这一点很重要，这个形式在普通 BFS 问题中都很常见，但是在 [Dijkstra 算法模板框架](https://labuladong.online/algo/data-structure/dijkstra/) 中我们修改了这种代码模式，读完并理解本文后你可以去看看 BFS 算法是如何演变成 Dijkstra 算法在加权图中寻找最短路径的。
 
 话说回来，二叉树本身是很简单的数据结构，我想上述代码你应该可以理解的，其实其他复杂问题都是这个框架的变形，再探讨复杂问题之前，我们解答两个问题：
 
@@ -238,7 +238,11 @@ void BFS(String target) {
 }
 ```
 
-> PS：这段代码当然有很多问题，但是我们做算法题肯定不是一蹴而就的，而是从简陋到完美的。不要完美主义，咱要慢慢来，好不。
+::: note
+
+这段代码当然有很多问题，但是我们做算法题肯定不是一蹴而就的，而是从简陋到完美的。不要完美主义，咱要慢慢来，好不。
+
+:::
 
 **这段 BFS 代码已经能够穷举所有可能的密码组合了，但是显然不能完成题目，有如下问题需要解决**：
 
@@ -308,9 +312,9 @@ int openLock(String[] deadends, String target) {
 
 为什么这样能够能够提升效率呢？其实从 Big O 表示法分析算法复杂度的话，它俩的最坏复杂度都是 `O(N)`，但是实际上双向 BFS 确实会快一些，我给你画两张图看一眼就明白了：
 
-![](https://labuladong.github.io/pictures/BFS/1.jpeg)
+![](https://labuladong.online/algo/images/BFS/1.jpeg)
 
-![](https://labuladong.github.io/pictures/BFS/2.jpeg)
+![](https://labuladong.online/algo/images/BFS/2.jpeg)
 
 图示中的树形结构，如果终点在最底部，按照传统 BFS 算法的策略，会把整棵树的节点都搜索一遍，最后找到 `target`；而双向 BFS 其实只遍历了半棵树就出现了交集，也就是找到了最短距离。从这个例子可以直观地感受到，双向 BFS 是要比传统 BFS 高效的。
 
@@ -392,7 +396,7 @@ while (!q1.isEmpty() && !q2.isEmpty()) {
 
 接下来可阅读：
 
-* [BFS 算法如何解决智力题](https://labuladong.github.io/article/fname.html?fname=BFS解决滑动拼图)
+* [BFS 算法如何解决智力题](https://labuladong.online/algo/practice-in-action/sliding-puzzle/)
 
 
 
@@ -400,19 +404,20 @@ while (!q1.isEmpty() && !q2.isEmpty()) {
 <details class="hint-container details">
 <summary><strong>引用本文的文章</strong></summary>
 
- - [Dijkstra 算法模板及应用](https://labuladong.github.io/article/fname.html?fname=dijkstra算法)
- - [Prim 最小生成树算法](https://labuladong.github.io/article/fname.html?fname=prim算法)
- - [东哥带你刷二叉树（纲领篇）](https://labuladong.github.io/article/fname.html?fname=二叉树总结)
- - [二分图判定算法](https://labuladong.github.io/article/fname.html?fname=二分图)
- - [二叉树的递归转迭代的代码框架](https://labuladong.github.io/article/fname.html?fname=迭代遍历二叉树)
- - [分治算法详解：运算优先级](https://labuladong.github.io/article/fname.html?fname=分治算法)
- - [如何用 BFS 算法秒杀各种智力题](https://labuladong.github.io/article/fname.html?fname=BFS解决滑动拼图)
- - [我的刷题心得](https://labuladong.github.io/article/fname.html?fname=算法心得)
- - [旅游省钱大法：加权最短路径](https://labuladong.github.io/article/fname.html?fname=旅行最短路径)
- - [本站简介](https://labuladong.github.io/article/fname.html?fname=home)
- - [环检测及拓扑排序算法](https://labuladong.github.io/article/fname.html?fname=拓扑排序)
- - [用算法打败算法](https://labuladong.github.io/article/fname.html?fname=PDF中的算法)
- - [算法学习和心流体验](https://labuladong.github.io/article/fname.html?fname=心流)
+ - [Dijkstra 算法模板及应用](https://labuladong.online/algo/data-structure/dijkstra/)
+ - [Prim 最小生成树算法](https://labuladong.online/algo/data-structure/prim/)
+ - [【强化练习】运用层序遍历解题 I](https://labuladong.online/algo/problem-set/binary-tree-level-1/)
+ - [【强化练习】运用层序遍历解题 II](https://labuladong.online/algo/problem-set/binary-tree-level-2/)
+ - [东哥带你刷二叉树（纲领篇）](https://labuladong.online/algo/essential-technique/binary-tree-summary/)
+ - [二分图判定算法](https://labuladong.online/algo/data-structure/bipartite-graph/)
+ - [分治算法详解：运算优先级](https://labuladong.online/algo/practice-in-action/divide-and-conquer/)
+ - [如何用 BFS 算法秒杀各种智力题](https://labuladong.online/algo/practice-in-action/sliding-puzzle/)
+ - [我的刷题心得：算法的本质](https://labuladong.online/algo/essential-technique/algorithm-summary/)
+ - [旅游省钱大法：加权最短路径](https://labuladong.online/algo/dynamic-programming/cheap-travel/)
+ - [环检测及拓扑排序算法](https://labuladong.online/algo/data-structure/topological-sort/)
+ - [用栈模拟递归迭代遍历二叉树](https://labuladong.online/algo/data-structure/iterative-traversal-binary-tree/)
+ - [用算法打败算法](https://labuladong.online/algo/other-skills/algorithm-in-pdf/)
+ - [算法学习和心流体验](https://labuladong.online/algo/other-skills/hert-flow/)
 
 </details><hr>
 
@@ -423,7 +428,7 @@ while (!q1.isEmpty() && !q2.isEmpty()) {
 <details class="hint-container details">
 <summary><strong>引用本文的题目</strong></summary>
 
-<strong>安装 [我的 Chrome 刷题插件](https://labuladong.github.io/article/fname.html?fname=chrome插件简介) 点开下列题目可直接查看解题思路：</strong>
+<strong>安装 [我的 Chrome 刷题插件](https://labuladong.online/algo/intro/chrome/) 点开下列题目可直接查看解题思路：</strong>
 
 | LeetCode | 力扣 |
 | :----: | :----: |
@@ -433,6 +438,7 @@ while (!q1.isEmpty() && !q2.isEmpty()) {
 | [1926. Nearest Exit from Entrance in Maze](https://leetcode.com/problems/nearest-exit-from-entrance-in-maze/?show=1) | [1926. 迷宫中离入口最近的出口](https://leetcode.cn/problems/nearest-exit-from-entrance-in-maze/?show=1) |
 | [286. Walls and Gates](https://leetcode.com/problems/walls-and-gates/?show=1)🔒 | [286. 墙与门](https://leetcode.cn/problems/walls-and-gates/?show=1)🔒 |
 | [310. Minimum Height Trees](https://leetcode.com/problems/minimum-height-trees/?show=1) | [310. 最小高度树](https://leetcode.cn/problems/minimum-height-trees/?show=1) |
+| [329. Longest Increasing Path in a Matrix](https://leetcode.com/problems/longest-increasing-path-in-a-matrix/?show=1) | [329. 矩阵中的最长递增路径](https://leetcode.cn/problems/longest-increasing-path-in-a-matrix/?show=1) |
 | [365. Water and Jug Problem](https://leetcode.com/problems/water-and-jug-problem/?show=1) | [365. 水壶问题](https://leetcode.cn/problems/water-and-jug-problem/?show=1) |
 | [431. Encode N-ary Tree to Binary Tree](https://leetcode.com/problems/encode-n-ary-tree-to-binary-tree/?show=1)🔒 | [431. 将 N 叉树编码为二叉树](https://leetcode.cn/problems/encode-n-ary-tree-to-binary-tree/?show=1)🔒 |
 | [490. The Maze](https://leetcode.com/problems/the-maze/?show=1)🔒 | [490. 迷宫](https://leetcode.cn/problems/the-maze/?show=1)🔒 |
@@ -451,6 +457,6 @@ while (!q1.isEmpty() && !q2.isEmpty()) {
 
 **＿＿＿＿＿＿＿＿＿＿＿＿＿**
 
-**《labuladong 的算法小抄》已经出版，关注公众号查看详情；后台回复「**全家桶**」可下载配套 PDF 和刷题全家桶**：
+**《labuladong 的算法笔记》已经出版，关注公众号查看详情；后台回复「**全家桶**」可下载配套 PDF 和刷题全家桶**：
 
-![](https://labuladong.github.io/pictures/souyisou2.png)
+![](https://labuladong.online/algo/images/souyisou2.png)
