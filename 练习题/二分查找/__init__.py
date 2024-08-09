@@ -108,14 +108,15 @@ class Solution(object):
     # todo 153. 寻找旋转排序数组中的最小值
     def findMin(self, nums):
         left = 0
-        right = len(nums) - 1
-        while left <= right:
-            mid = (right + left) // 2
-            if nums[mid] < nums[mid + 1]:
-                right = mid - 1
+        right = len(nums)
+        while left < right:
+            mid = (right - left) // 2 + left
+            if nums[mid] > nums[-1]:
+                right = mid
             else:
                 left = mid + 1
         return nums[left]
+
 
     # 寻找第K小的元素
     def findKthSmallest(self, nums, k):

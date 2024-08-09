@@ -260,10 +260,10 @@ class Solution:
         while heap and len(res) < k:
             _, i, j = heapq.heappop(heap)
             res.append([nums1[i], nums2[j]])
-            print(i, j + 1)
+            # print(i, j + 1)
             push(i, j + 1)
             if j == 0:
-                print(i + 1, j)
+                # print(i + 1, j)
                 push(i + 1, j)
         print(res)
 

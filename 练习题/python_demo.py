@@ -2,9 +2,10 @@
 import collections
 from typing import List
 from collections import Counter
-
+from 链表 import ListNode
 
 import heapq
+
 
 class Solution:
 
@@ -766,7 +767,6 @@ def find3(nums):
 
 # def findKthLargest(nums, k):
 def findKthSmallest(nums, k):
-
     # heap = []
     # for num in nums:
     #     heapq.heappush(heap, num)
@@ -780,6 +780,8 @@ def findKthSmallest(nums, k):
         if len(heap) > k:
             heapq.heappop(heap)
     return heapq.heappop(heap)
+
+
 def search(nums: List[int], target: int) -> int:
     left = 0
     right = len(nums)
@@ -795,18 +797,47 @@ def search(nums: List[int], target: int) -> int:
             else:
                 left = mid + 1
         else:
-            if nums[mid] < target <= nums[right]:
+            if nums[mid] < target <= nums[right - 1]:
                 left = mid + 1
             else:
                 right = mid
     return -1
+
+    # todo linkenode
+
+    def mergeNodes(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+    给你一个链表的头节点 head ，该链表包含由 0 分隔开的一连串整数。链表的 开端 和 末尾 的节点都满足 Node.val == 0 。
+
+    对于每两个相邻的 0 ，请你将它们之间的所有节点合并成一个节点，其值是所有已合并节点的值之和。然后将所有 0 移除，修改后的链表不应该含有任何 0 。
+
+    返回修改后链表的头节点 head 。
+        """
+        cur = head.next
+        res = ListNode(0)
+
+        dummy = res
+        count = 0
+        while cur:
+            if cur:
+                count += cur.val
+            else:
+                dummy.next = ListNode(val=count)
+                count = 0
+                dummy = dummy.next
+            cur = cur.next
+        return res.next
+
+
+
+
 
 
 
 if __name__ == '__main__':
     # print(findKthSmallest([3, 5, 7, 9], 1))
 
-    # so = Solution()
+    so = Solution()
     # res = so.maxSubArray([-2, -1])
     # print(res)
     # res = so.maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])
@@ -838,7 +869,6 @@ if __name__ == '__main__':
     #
     # # print(longest_common_prefix(['flower', 'flo', 'flower']))
     # print(findkaishi([5, 7, 7, 8, 8, 10], 8))
-
-    import  itertools
-    l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    print(list(itertools.accumulate(l)))
+    # import  itertools
+    # l = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    # print(list(itertools.accumulate(l)))

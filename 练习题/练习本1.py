@@ -7,7 +7,7 @@ import collections
 from typing import List, Optional
 from collections import defaultdict, Counter, deque, OrderedDict
 import math
-from 链表 import *
+from 链表 import ListNode, TreeNode
 
 '''
 给定两个字符串 s 和 p，找到 s 中所有 p 的 异位词 的子串，返回这些子串的起始索引。不考虑答案输出的顺序。
@@ -440,3 +440,119 @@ class Solution:
             return new_s[:l] == new_s[l + 1:][::-1]
         else:
             return new_s[:l] == new_s[l:][::-1]
+
+
+def eraseOverlapIntervals(intervals: List[List[int]]) -> int:
+    if len(intervals) <= 1:
+        return 0
+    intervals.sort(key=lambda x: x[1])
+    right = intervals[0][1]
+    ans = 1
+    print(intervals)
+    for i in range(1, len(intervals)):
+        if right <= intervals[i][0]:
+            ans += 1
+            right = intervals[i][1]
+    return len(intervals) - ans
+
+
+def kSmallestPairs(nums1: List[int], nums2: List[int], k: int) -> List[List[int]]:
+    import heapq
+    heap = []
+
+    def push(i, j):
+        if i < len(nums1) and j < len(nums2):
+            heapq.heappush(heap, (nums1[i] + nums2[j], i, j))
+
+    res = []
+    push(0, 0)
+    while len(res) < k:
+        _, i, j = heapq.heappop(heap)
+        res.append([i, j])
+        push(i + 1, j)
+        if j == 0:
+            push(i, j + 1)
+    return res
+
+
+def numOfSubarrays(arr: List[int], k: int, threshold: int) -> int:
+    '''
+    给你一个整数数组 arr 和两个整数 k 和 threshold 。请你返回长度为 k 且平均值大于等于 threshold 的子数组数目。
+
+    示例 1：
+    输入：arr = [2,2,2,2,5,5,5,8], k = 3, threshold = 4
+    输出：3
+    解释：子数组 [2,5,5],[5,5,5] 和 [5,5,8] 的平均值分别为 4，5 和 6 。其他长度为 3 的子数组的平均值都小于 4 （threshold 的值)。
+    '''
+    left = 0
+    count = 0
+    res = 0
+    for right in range(len(arr)):
+        count += arr[right]
+
+        while right - left + 1 > k:
+            count -= arr[left]
+            left += 1
+        if right - left + 1 == k and count >= threshold * k:
+            res += 1
+    return res
+
+
+class Solutions2:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        n = len(s)
+        counter = {}
+        left = 0
+        res = 0
+        for right in range(n):
+            counter[s[right]] = counter.get(s[right], 0) + 1
+
+            while counter[s[right]] > 1:
+                counter[s[left]] -= 1
+                left += 1
+
+            res = max(res, right - left + 1)
+        return res
+
+    def longestSubarray(self, nums: List[int]) -> int:
+        n = len(nums)
+        left = 0
+        res = 0
+        count = 0
+        for right in range(n):
+
+            if nums[right] == 0:
+                count += 1
+
+            while count > 1:
+                if nums[left] == 0:
+                    count -= 1
+                left += 1
+
+            res = max(res, right - left + 1)
+
+        return res - 1
+
+    def longestSubstring(self, s: str, k: int) -> int:
+        if len(s) < k:
+            return 0
+        counter = Counter(s)
+        for char, count in counter.items():
+            if count < k:
+                sub_string_list = s.split(char)
+                res = []
+                for sub_string in sub_string_list:
+                    res.append(self.longestSubstring(sub_string, k))
+                return max(res)
+        return len(s)
+
+
+if __name__ == '__main__':
+    so = Solutions2()
+    # so.longestSubstring("abbbc", 2)
+    nums = [2, 6, 7, 3, 1, 7]
+    k = 3
+    print(nums)
+    print(nums[k - 1: ])
+    for i, j in zip(nums, nums[k - 1:]):
+        print(i, j)

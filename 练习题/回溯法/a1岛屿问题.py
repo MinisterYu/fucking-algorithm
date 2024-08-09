@@ -163,3 +163,37 @@ class Solution:
                     # 淹没岛屿，并更新最大岛屿面积
                     res = max(res, dfs(i, j))
         return res
+
+    def solve(self, board: List[List[str]]) -> None:
+        # https://leetcode.cn/problems/surrounded-regions/description/?envType=study-plan-v2&envId=2024-spring-sprint-100
+        '''
+        给你一个 m x n 的矩阵 board ，由若干字符 'X' 和 'O' 组成，捕获 所有 被围绕的区域：
+
+        连接：一个单元格与水平或垂直方向上相邻的单元格连接。
+        区域：连接所有 'O' 的单元格来形成一个区域。
+        围绕：如果您可以用 'X' 单元格 连接这个区域，并且区域中没有任何单元格位于 board 边缘，则该区域被 'X' 单元格围绕。
+        通过将输入矩阵 board 中的所有 'O' 替换为 'X' 来 捕获被围绕的区域。
+        '''
+        m, n = len(board), len(board[0])
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        def dfs(i, j):
+            if not 0 <= i < m or not 0 <= j < n or not board[i][j] == 'O':
+                return
+
+            board[i][j] = '#'
+            for dx, dy in dirs:
+                dfs(i + dx, j + dy)
+
+        for i in range(m):
+            for j in range(n):
+                if i == 0 or i == m - 1 or j == 0 or j == n - 1:
+                    if board[i][j] == 'O':
+                        dfs(i, j)
+
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == '#':
+                    board[i][j] = 'O'
+
