@@ -546,13 +546,30 @@ class Solutions2:
                 return max(res)
         return len(s)
 
+    def evalRPN(self, tokens: List[str]) -> int:
+        res = 0
+        stack = []
+        while tokens:
+            char = tokens.pop(0)
+            if char.isnumeric():
+                stack.append(int(char))
+            else:
+                num2 = stack.pop()
+                num1 = stack.pop()
+
+                if char == '+':
+                    stack.append(num1 + num2)
+                if char == '-':
+                    stack.append(num1 - num2)
+                if char == '*':
+                    stack.append(num1 * num2)
+                if char == '/':
+                    stack.append((int(math.truediv(num1, num2))))
+
+        print(sum(stack))
+        return sum(stack)
 
 if __name__ == '__main__':
     so = Solutions2()
-    # so.longestSubstring("abbbc", 2)
-    nums = [2, 6, 7, 3, 1, 7]
-    k = 3
-    print(nums)
-    print(nums[k - 1: ])
-    for i, j in zip(nums, nums[k - 1:]):
-        print(i, j)
+    # so.evalRPN(["10","6","9","3","+","-11","*","/","*","17","+","5","+"])
+    print("-11".isalnum())

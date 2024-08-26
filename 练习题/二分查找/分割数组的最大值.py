@@ -5,6 +5,7 @@
 # @File    : 分割数组的最大值.py
 from typing import List
 
+
 class Solution:
     '''
     https://leetcode.cn/problems/split-array-largest-sum/description/?envType=study-plan-v2&envId=2024-spring-sprint-100
@@ -18,9 +19,10 @@ class Solution:
     输入：nums = [7,2,5,10,8], k = 2
     输出：18
     '''
+
     def splitArray(self, nums: List[int], k: int) -> int:
-        def check(nums, target, k):
-            cnt, total = 1, 0
+        def check(target):
+            cnt, total = 1, 0  # cnt: 当前已分割的子数组数量, total: 当前子数组的和
             for num in nums:
                 if total + num > target:
                     cnt += 1
@@ -32,7 +34,7 @@ class Solution:
         left, right = max(nums), sum(nums)
         while left < right:
             mid = (right - left) // 2 + left
-            if check(nums, mid, k):
+            if check(mid):
                 right = mid
             else:
                 left = mid + 1
