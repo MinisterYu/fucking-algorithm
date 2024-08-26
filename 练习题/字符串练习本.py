@@ -191,9 +191,41 @@ class Solution:
 
                 left += 1
         return res
+
     def exist(self, board: List[List[str]], word: str) -> bool:
         # https://leetcode.cn/problems/word-search/
         # 搜索单词
+        m, n = len(board), len(board[0])
+        if m * n < len(word):
+            return False
+        counter_word = Counter(word)
+        counter_board = Counter([board[i][j] for i in range(m) for j in range(n)])
+
+        for char in counter_word:
+            if char not in counter_board:
+                return False
+            if counter_word[char] > counter_board[char]:
+                return False
+        if counter_board[word[0]] < counter_word[word[-1]]:
+            word = word[::-1]
+        visited = [[False] * n for _ in range(m)]
+
+        def dfs(i, j, k):
+            if k == len(word):
+                return True
+            if not i < m or not j < n or board[i][j] != word[k] or visited[i][j]:
+                return False
+
+            visited[i][j] = True
+            res = dfs(i + 1, j, k + 1) or dfs(i, j + 1, k) or dfs(i + 1, j + 1, k + 1)
+            visited[i][j] = False
+            return res
+
+        for i in range(m):
+            for j in range(n):
+                if dfs(i, j, 0):
+                    return True
+        return False
 
 
 if __name__ == '__main__':
